@@ -12,6 +12,6 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 
 export default new Router({
   routes,
-  mode: 'history',
+  mode: process.env.NODE_ENV === 'development' ? 'history' : 'hash',
   base: process.env.BASE_URL
 });

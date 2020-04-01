@@ -9,7 +9,8 @@
     "test:unit": "vue-cli-service test:unit",
     "lint:preset": "vue-cli-service lint",
     "lint:additional": "prettier --write src/**/*.{css,scss,sass,json}",
-    "lint": "npm run lint:preset && npm run lint:additional"
+    "lint": "npm run lint:preset && npm run lint:additional",
+    "deploy": "bash deploy.sh"
   },
   "dependencies": {
     "axios": "^0.19.2",
