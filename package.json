@@ -4,12 +4,19 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern",
+    "build:report": "vue-cli-service build --modern --report",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint:preset": "vue-cli-service lint",
+    "lint:additional": "prettier --write src/**/*.{css,scss,sass,json}",
+    "lint": "npm run lint:preset && npm run lint:additional"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "element-ui": "^2.13.0",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"

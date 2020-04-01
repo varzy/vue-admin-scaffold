@@ -1,11 +1,9 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <div class="errors-404"></div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'Error404'
 };
 </script>
