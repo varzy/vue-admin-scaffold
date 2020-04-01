@@ -1,16 +1,73 @@
 import _import from './importer';
 import LayoutHome from '../views/layouts/Home';
 import IRouteMeta from '../models/IRouteMeta';
+import Virtual from '@/views/layouts/Virtual';
 
-export const homeNavigates = [
+export const navigation = [
   {
     path: '',
-    alias: 'index',
+    alias: ['index', 'dashboard'],
     name: 'Index',
     component: _import('index/Index'),
-    meta: new IRouteMeta({
-      title: '首页'
-    })
+    meta: new IRouteMeta({ title: '首页', hideTitleInBrowserTab: true })
+  },
+  {
+    path: 'nested',
+    name: 'Nested',
+    component: Virtual,
+    redirect: { name: 'NestedIndex' },
+    meta: new IRouteMeta({ title: '嵌套导航' }),
+    children: [
+      {
+        path: '',
+        alias: 'index',
+        name: 'NestedIndex',
+        component: _import('nested/Index'),
+        meta: new IRouteMeta({ title: '首页' })
+      },
+      {
+        path: 'second',
+        name: 'NestedSecond',
+        component: Virtual,
+        redirect: { name: 'NestedSecondOne' },
+        meta: new IRouteMeta({ title: '第二级' }),
+        children: [
+          {
+            path: 'one',
+            name: 'NestedSecondOne',
+            component: _import('nested/second/SecondOne'),
+            meta: new IRouteMeta({ title: 'nested-2-1' })
+          },
+          {
+            path: 'two',
+            name: 'NestedSecondTwo',
+            component: _import('nested/second/SecondTwo'),
+            meta: new IRouteMeta({ title: 'nested-2-2' })
+          },
+          {
+            path: 'third',
+            name: 'NestedSecondThird',
+            component: Virtual,
+            redirect: { name: 'NestedSecondThirdOne' },
+            meta: new IRouteMeta({ title: '第三级' }),
+            children: [
+              {
+                path: 'one',
+                name: 'NestedSecondThirdOne',
+                component: _import('nested/second/third/ThirdOne'),
+                meta: new IRouteMeta({ title: 'nested-3-1' })
+              },
+              {
+                path: 'two',
+                name: 'NestedSecondThirdTwo',
+                component: _import('nested/second/third/ThirdTwo'),
+                meta: new IRouteMeta({ title: 'nested-3-2' })
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];
 
@@ -22,7 +79,7 @@ export default [
     component: LayoutHome,
     meta: new IRouteMeta({ hideInHomeBreadcrumb: true }),
     children: [
-      ...homeNavigates,
+      ...navigation,
       {
         path: '404',
         name: 'Error404',

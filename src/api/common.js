@@ -1,7 +1,8 @@
 import http from '@/utils/http';
 
-export const reqTestApi = () =>
+export const reqTestFetchingApi = (username, params) =>
   http({
-    url: '/',
-    method: 'GET'
+    url: `/users/${username}/repos`,
+    method: 'GET',
+    params
   });
