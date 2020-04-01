@@ -12,6 +12,7 @@ export const navigation = [
     meta: new IRouteMeta({
       title: '首页',
       hideTitleInBrowserTab: true,
+      hideInBreadcrumb: true,
       icon: 'el-icon-s-home'
     })
   },
@@ -82,6 +83,12 @@ export const navigation = [
                 meta: new IRouteMeta({ title: 'SecondThirdSecond', hideHomeBreadcrumb: true })
               }
             ]
+          },
+          {
+            path: 'fourth',
+            name: 'NestedSecondFourth',
+            component: _import('nested/second/Fourth'),
+            meta: new IRouteMeta({ title: 'SecondFourth' })
           }
         ]
       }

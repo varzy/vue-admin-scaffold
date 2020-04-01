@@ -28,6 +28,7 @@
       <header class="layouts_home-body-header">
         <div class="left">
           <el-breadcrumb class="breadcrumb" v-show="$store.state.view.homeBreadcrumbVisible">
+            <el-breadcrumb-item :to="{ name: 'Index' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item v-for="(breadcrumb, index) in calcBreadcrumb" :key="index">
               <router-link v-if="breadcrumb.enabled" :to="breadcrumb.route">
                 {{ breadcrumb.title }}
@@ -55,6 +56,12 @@
         <transition name="fade" mode="out-in">
           <router-view />
         </transition>
+
+        <footer class="layouts_home-body-main-footer">
+          <span class="copyright">&copy; {{ new Date().getFullYear() }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <a class="me" href="https://varzy.me" target="_blank">Aiden Zhao</a>
+        </footer>
       </main>
     </section>
   </section>
@@ -219,12 +226,25 @@ export default {
       padding: 16px;
       overflow: auto;
 
-      &:after {
-        content: 'for firefox';
-        display: block;
-        visibility: hidden;
-        width: 100%;
-        height: 20px;
+      &-footer {
+        margin-top: 64px;
+        text-align: center;
+        color: #666;
+        font-size: 14px;
+
+        .me {
+          text-decoration: none;
+
+          &:link,
+          &:visited {
+            color: #666;
+          }
+
+          &:hover,
+          &:active {
+            color: $g-color-primary;
+          }
+        }
       }
     }
   }

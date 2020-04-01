@@ -58,4 +58,16 @@
       text-align: $position;
     }
   }
+
+  &-gap {
+    margin-top: 16px;
+
+    &-l {
+      margin-top: 24px;
+    }
+
+    &-s {
+      margin-top: 8px;
+    }
+  }
 }
