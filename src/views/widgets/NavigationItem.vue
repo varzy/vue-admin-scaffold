@@ -7,7 +7,10 @@
     :index="route.name"
   >
     <!-- title -->
-    <span slot="title">{{ getTitle(route) }}</span>
+    <template #title>
+      <i v-if="calcShouldRenderIcon('submenu', route)" :class="calcIcon(route)"></i>
+      <span>{{ calcTitle(route) }}</span>
+    </template>
 
     <!-- items -->
     <template v-for="child in route.children">
@@ -15,12 +18,14 @@
         v-if="child.children && child.children.length > 0"
         :key="child.name"
         :route="child"
+        :level="level + 1"
         @node-click="parentClick"
       >
       </navigation-item>
 
       <el-menu-item v-else :key="child.name" :index="child.name" @click="nodeClick(child)">
-        {{ getTitle(child) }}
+        <i v-if="calcShouldRenderIcon('childItem', child)" :class="calcIcon(child)"></i>
+        <span>{{ calcTitle(child) }}</span>
       </el-menu-item>
     </template>
   </el-submenu>
@@ -28,7 +33,8 @@
 
   <!-- start: menu-item -->
   <el-menu-item v-else :index="route.name" @click="nodeClick(route)">
-    {{ getTitle(route) }}
+    <i v-if="calcShouldRenderIcon('menuItem', route)" :class="calcIcon(route)"></i>
+    <span>{{ calcTitle(route) }}</span>
   </el-menu-item>
   <!-- end: menu-item -->
 </template>
@@ -41,12 +47,22 @@ export default {
     route: {
       type: Object,
       required: true
+    },
+    level: {
+      type: Number,
+      default: 0
     }
   },
 
   methods: {
-    getTitle(route) {
+    calcTitle(route) {
       return (route.meta && route.meta.title) || '未命名';
+    },
+    calcShouldRenderIcon(type, route) {
+      return (route.meta && route.meta.icon) || (this.level === 0 && type !== 'childItem');
+    },
+    calcIcon(route) {
+      return route.meta && route.meta.icon ? route.meta.icon : 'el-icon-s-data';
     },
     nodeClick(route) {
       this.$emit('node-click', route);
@@ -57,3 +73,15 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.el-menu-item.is-active {
+  background-color: $g-color-primary;
+  color: #fff;
+
+  &:hover {
+    background-color: $g-color-primary;
+    color: #fff;
+  }
+}
+</style>

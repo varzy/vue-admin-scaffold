@@ -9,14 +9,18 @@ export const navigation = [
     alias: ['index', 'dashboard'],
     name: 'Index',
     component: _import('index/Index'),
-    meta: new IRouteMeta({ title: '首页', hideTitleInBrowserTab: true })
+    meta: new IRouteMeta({
+      title: '首页',
+      hideTitleInBrowserTab: true,
+      icon: 'el-icon-s-home'
+    })
   },
   {
     path: 'curd',
     name: 'Curd',
     component: Virtual,
     redirect: { name: 'CurdTable' },
-    meta: new IRouteMeta({ title: '增删改查' }),
+    meta: new IRouteMeta({ title: '增删改查', icon: 'el-icon-s-management' }),
     children: [
       {
         path: 'table',
@@ -30,53 +34,52 @@ export const navigation = [
     path: 'nested',
     name: 'Nested',
     component: Virtual,
-    redirect: { name: 'NestedIndex' },
-    meta: new IRouteMeta({ title: '嵌套导航' }),
+    redirect: { name: 'NestedFirst' },
+    meta: new IRouteMeta({ title: '嵌套导航栏 & 面包屑', icon: 'el-icon-s-promotion' }),
     children: [
       {
-        path: '',
-        alias: 'index',
-        name: 'NestedIndex',
-        component: _import('nested/Index'),
-        meta: new IRouteMeta({ title: '首页' })
+        path: 'first',
+        name: 'NestedFirst',
+        component: _import('nested/First'),
+        meta: new IRouteMeta({ title: 'First' })
       },
       {
         path: 'second',
         name: 'NestedSecond',
         component: Virtual,
-        redirect: { name: 'NestedSecondOne' },
-        meta: new IRouteMeta({ title: '第二级' }),
+        redirect: { name: 'NestedSecondFirst' },
+        meta: new IRouteMeta({ title: 'Second' }),
         children: [
           {
-            path: 'one',
-            name: 'NestedSecondOne',
-            component: _import('nested/second/SecondOne'),
-            meta: new IRouteMeta({ title: 'nested-2-1' })
+            path: 'first',
+            name: 'NestedSecondFirst',
+            component: _import('nested/second/First'),
+            meta: new IRouteMeta({ title: 'SecondFirst' })
           },
           {
-            path: 'two',
-            name: 'NestedSecondTwo',
-            component: _import('nested/second/SecondTwo'),
-            meta: new IRouteMeta({ title: 'nested-2-2' })
+            path: 'second',
+            name: 'NestedSecondSecond',
+            component: _import('nested/second/Second'),
+            meta: new IRouteMeta({ title: 'SecondSecond' })
           },
           {
             path: 'third',
             name: 'NestedSecondThird',
             component: Virtual,
-            redirect: { name: 'NestedSecondThirdOne' },
-            meta: new IRouteMeta({ title: '第三级' }),
+            redirect: { name: 'NestedSecondThirdFirst' },
+            meta: new IRouteMeta({ title: 'SecondThird', disabledInBreadcrumb: true }),
             children: [
               {
-                path: 'one',
-                name: 'NestedSecondThirdOne',
-                component: _import('nested/second/third/ThirdOne'),
-                meta: new IRouteMeta({ title: 'nested-3-1' })
+                path: 'first',
+                name: 'NestedSecondThirdFirst',
+                component: _import('nested/second/third/First'),
+                meta: new IRouteMeta({ title: 'SecondThirdFirst' })
               },
               {
                 path: 'two',
                 name: 'NestedSecondThirdTwo',
-                component: _import('nested/second/third/ThirdTwo'),
-                meta: new IRouteMeta({ title: 'nested-3-2', hideHomeBreadcrumb: true })
+                component: _import('nested/second/third/Second'),
+                meta: new IRouteMeta({ title: 'SecondThirdSecond', hideHomeBreadcrumb: true })
               }
             ]
           }
@@ -88,7 +91,7 @@ export const navigation = [
     path: 'error',
     name: 'Error',
     component: Virtual,
-    meta: new IRouteMeta({ title: '错误' }),
+    meta: new IRouteMeta({ title: '错误', icon: 'el-icon-error' }),
     children: [
       {
         path: '404',
@@ -101,7 +104,7 @@ export const navigation = [
   {
     path: '-',
     name: 'Action',
-    meta: new IRouteMeta({ title: '自定义事件', action: 'SayHi' })
+    meta: new IRouteMeta({ title: '自定义事件', action: 'SayHi', icon: 'el-icon-s-opportunity' })
   }
 ];
 

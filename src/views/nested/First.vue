@@ -1,9 +1,9 @@
 <template>
-  <div class="nested">nested-index</div>
+  <div class="first">First</div>
 </template>
 
 <script>
 export default {
-  name: 'Nested'
+  name: 'First'
 };
 </script>

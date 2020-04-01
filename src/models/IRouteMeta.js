@@ -2,6 +2,7 @@ export default class {
   constructor({
     title,
     action,
+    icon,
     hideTitleInBrowserTab = false,
     hideInBreadcrumb = false,
     hideHomeBreadcrumb = false,
@@ -10,6 +11,7 @@ export default class {
   }) {
     this.title = title;
     this.action = action;
+    this.icon = icon;
     this.hideTitleInBrowserTab = hideTitleInBrowserTab;
     this.hideInBreadcrumb = hideInBreadcrumb;
     this.hideHomeBreadcrumb = hideHomeBreadcrumb;
