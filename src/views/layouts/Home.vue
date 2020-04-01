@@ -1,17 +1,18 @@
 <template>
   <section class="layouts_home">
     <aside
-      :class="['layouts_home-aside', { 'layouts_home-aside-collapsed': isAsideCollapsed }]"
+      class="layouts_home-aside"
       :style="{ backgroundColor: page.asideBgc, width: page.asideWidth + 'px' }"
     >
-      <div class="logo" v-show="!isAsideCollapsed">{{ projectName }}</div>
+      <div class="logo">
+        <span class="logo-inner" @click="$router.push({ name: 'Index' })">{{ projectName }}</span>
+      </div>
 
       <el-menu
         class="menu"
         text-color="#eee"
         :background-color="page.asideBgc"
         :default-active="$route.name"
-        :collapse="isAsideCollapsed"
       >
         <navigation-item
           v-for="navigation in $store.state.view.navigation"
@@ -72,7 +73,6 @@ export default {
 
   data() {
     return {
-      isAsideCollapsed: false,
       menuActiveColor: PRIMARY_COLOR,
       projectName: process.env.VUE_APP_PROJECT_NAME,
       userAvatar: require('@/assets/images/default_avatar.png'),
@@ -164,6 +164,10 @@ export default {
       text-align: center;
       color: #fff;
       font-weight: bold;
+
+      &-inner {
+        cursor: pointer;
+      }
     }
 
     .menu {
