@@ -12,6 +12,21 @@ export const navigation = [
     meta: new IRouteMeta({ title: '首页', hideTitleInBrowserTab: true })
   },
   {
+    path: 'curd',
+    name: 'Curd',
+    component: Virtual,
+    redirect: { name: 'CurdTable' },
+    meta: new IRouteMeta({ title: '增删改查' }),
+    children: [
+      {
+        path: 'table',
+        name: 'CurdTable',
+        component: _import('curd/Table'),
+        meta: new IRouteMeta({ title: '表格' })
+      }
+    ]
+  },
+  {
     path: 'nested',
     name: 'Nested',
     component: Virtual,
@@ -68,6 +83,20 @@ export const navigation = [
         ]
       }
     ]
+  },
+  {
+    path: 'error',
+    name: 'Error',
+    component: Virtual,
+    meta: new IRouteMeta({ title: '错误' }),
+    children: [
+      {
+        path: '404',
+        name: 'Error404',
+        component: _import('error/404'),
+        meta: new IRouteMeta({ title: '404', hideHomeBreadcrumb: true })
+      }
+    ]
   }
 ];
 
@@ -78,15 +107,7 @@ export default [
     redirect: { name: 'Index' },
     component: LayoutHome,
     meta: new IRouteMeta({ hideInHomeBreadcrumb: true }),
-    children: [
-      ...navigation,
-      {
-        path: '404',
-        name: 'Error404',
-        component: _import('errors/404'),
-        meta: new IRouteMeta({ title: '404 Not Found', hideHomeBreadcrumb: true })
-      }
-    ]
+    children: [...navigation]
   },
   {
     path: '/login',

@@ -1,5 +1,5 @@
 <template>
-  <div class="nested">nested index</div>
+  <div class="nested">nested-index</div>
 </template>
 
 <script>
