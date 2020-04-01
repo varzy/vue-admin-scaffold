@@ -9,11 +9,16 @@ import { ls } from '@/utils/Storage';
 NProgress.configure({ showSpinner: false });
 
 Router.beforeEach(async (to, from, next) => {
-  // 开启 NProgress
+  /**
+   * NProgress
+   */
   if (to.meta && !to.meta.hideProgress) {
     NProgress.start();
   }
 
+  /**
+   * 权限
+   */
   // 已登录
   if (Permission.isLogin()) {
     // 不允许已登录状态下再次进入登录页
@@ -34,11 +39,20 @@ Router.beforeEach(async (to, from, next) => {
     }
   }
 
+  /**
+   * 视图
+   */
   // 保存导航栏至 vuex
   if (!Store.state.view.isNavigationSaved) {
     Store.commit('view/STORE_NAVIGATION', _cloneDeep(navigation));
   }
 
+  Store.commit('view/UNSET_CUSTOM_BREADCRUMB');
+  Store.commit('view/UPDATE_HOME_BREADCRUMB_VISIBLE', to.meta && !to.meta.hideHomeBreadcrumb);
+
+  /**
+   * 浏览器标签页标题
+   */
   const routeTitle =
     to.meta && !to.meta.hideTitleInBrowserTab && to.meta.title ? to.meta.title : null;
   document.title = routeTitle

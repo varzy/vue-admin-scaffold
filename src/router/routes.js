@@ -76,7 +76,7 @@ export const navigation = [
                 path: 'two',
                 name: 'NestedSecondThirdTwo',
                 component: _import('nested/second/third/ThirdTwo'),
-                meta: new IRouteMeta({ title: 'nested-3-2' })
+                meta: new IRouteMeta({ title: 'nested-3-2', hideHomeBreadcrumb: true })
               }
             ]
           }
@@ -111,7 +111,7 @@ export default [
     name: 'LayoutHome',
     redirect: { name: 'Index' },
     component: LayoutHome,
-    meta: new IRouteMeta({ hideInHomeBreadcrumb: true }),
+    meta: new IRouteMeta({ hideInBreadcrumb: true }),
     children: [...navigation]
   },
   {

@@ -1,5 +1,8 @@
 <template>
-  <div class="third_two">nested-3-2</div>
+  <div class="third_two">
+    <div>nested-3-2</div>
+    <div>隐藏了面包屑导航栏</div>
+  </div>
 </template>
 
 <script>
