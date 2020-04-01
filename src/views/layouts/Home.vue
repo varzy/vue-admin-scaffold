@@ -29,7 +29,7 @@
             <el-dropdown-item>删除</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>{{ userInfo.name }}</span>
+        <span>{{ $store.state.user.userInfo.name }}</span>
         <el-link @click="onLogout">退出登录</el-link>
       </el-header>
 
@@ -43,7 +43,6 @@
 <script>
 import NavigationItem from '../widgets/NavigationItem';
 import { PRIMARY_COLOR } from '../../config/constants';
-import { mapState } from 'vuex';
 import Permission from '../../utils/Permission';
 
 export default {
@@ -58,12 +57,6 @@ export default {
     };
   },
 
-  computed: {
-    ...mapState({
-      userInfo: state => state.user.userInfo
-    })
-  },
-
   methods: {
     handleMenuItemClick(route) {
       const routeAction = route.meta.action;
@@ -73,20 +66,28 @@ export default {
         return;
       }
 
-      const relations = {};
+      const relations = {
+        SayHi: this.sayHi
+      };
 
       const willDo = relations[routeAction];
       if (willDo) {
         willDo();
       } else {
-        this.$message.error('未知错误');
+        this.$message.error('未知的自定义事件');
       }
     },
     onLogout() {
       Permission.logout();
 
-      this.$message.success('您已退出登录');
+      this.$message.success('你已退出登录');
       this.$router.push({ name: 'Login' });
+    },
+    sayHi() {
+      this.$notify({
+        title: 'hello, world',
+        message: '你触发了一个自定义事件'
+      });
     }
   }
 };

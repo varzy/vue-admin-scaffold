@@ -97,6 +97,11 @@ export const navigation = [
         meta: new IRouteMeta({ title: '404', hideHomeBreadcrumb: true })
       }
     ]
+  },
+  {
+    path: '-',
+    name: 'Action',
+    meta: new IRouteMeta({ title: '自定义事件', action: 'SayHi' })
   }
 ];
 
