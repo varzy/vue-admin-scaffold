@@ -3,6 +3,8 @@ import NProgress from 'nprogress';
 import Store from '../store/';
 import { navigation } from '@/router/routes';
 import { cloneDeep as _cloneDeep } from 'lodash';
+import Permission from '@/utils/Permission';
+import { ls } from '@/utils/Storage';
 
 NProgress.configure({ showSpinner: false });
 
@@ -12,7 +14,27 @@ Router.beforeEach(async (to, from, next) => {
     NProgress.start();
   }
 
-  // 存入导航栏
+  // 已登录
+  if (Permission.isLogin()) {
+    // 不允许已登录状态下再次进入登录页
+    if (to.name === 'Login') {
+      next({ name: 'Index' });
+    }
+
+    // 保存用户信息至 vuex
+    if (!Store.state.user.userInfo.id) {
+      Store.commit('user/STORE_USER_INFO', ls.get('user'));
+    }
+  }
+  // 未登录
+  else {
+    // 强制重定向到登录页
+    if (to.name !== 'Login') {
+      next({ name: 'Login' });
+    }
+  }
+
+  // 保存导航栏至 vuex
   if (!Store.state.view.isNavigationSaved) {
     Store.commit('view/STORE_NAVIGATION', _cloneDeep(navigation));
   }

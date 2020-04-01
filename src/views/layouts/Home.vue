@@ -29,7 +29,8 @@
             <el-dropdown-item>删除</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>王小虎</span>
+        <span>{{ userInfo.name }}</span>
+        <el-link @click="onLogout">退出登录</el-link>
       </el-header>
 
       <el-main class="layouts_home-body-main">
@@ -42,6 +43,8 @@
 <script>
 import NavigationItem from '../widgets/NavigationItem';
 import { PRIMARY_COLOR } from '../../config/constants';
+import { mapState } from 'vuex';
+import Permission from '../../utils/Permission';
 
 export default {
   name: 'LayoutHome',
@@ -53,6 +56,12 @@ export default {
       menuActiveColor: PRIMARY_COLOR,
       projectName: process.env.VUE_APP_PROJECT_NAME
     };
+  },
+
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.userInfo
+    })
   },
 
   methods: {
@@ -72,6 +81,12 @@ export default {
       } else {
         this.$message.error('未知错误');
       }
+    },
+    onLogout() {
+      Permission.logout();
+
+      this.$message.success('您已退出登录');
+      this.$router.push({ name: 'Login' });
     }
   }
 };
