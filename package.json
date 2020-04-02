@@ -10,6 +10,9 @@
     "lint:preset": "vue-cli-service lint",
     "lint:additional": "prettier --write src/**/*.{css,scss,sass,json}",
     "lint": "npm run lint:preset && npm run lint:additional",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:deploy": "bash ./docs/deploy.sh",
     "deploy": "bash deploy.sh"
   },
   "dependencies": {
@@ -40,6 +43,7 @@
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.4.0"
   }
 }
