@@ -1,6 +1,9 @@
 export default function(el, { value, arg }) {
   if (!['width', 'height', 'w', 'h'].includes(arg)) {
-    console.error('The directive arg muse be width, height, w or h');
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line
+      console.error('The directive arg muse be width, height, w or h');
+    }
     return;
   }
 
