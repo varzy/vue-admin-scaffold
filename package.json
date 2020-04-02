@@ -10,19 +10,21 @@
     "lint:preset": "vue-cli-service lint",
     "lint:additional": "prettier --write src/**/*.{css,scss,sass,json}",
     "lint": "npm run lint:preset && npm run lint:additional",
+    "deploy": "bash deploy.sh",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "bash ./docs/deploy.sh",
-    "deploy": "bash deploy.sh"
+    "docs:deploy": "bash ./docs/deploy.sh"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "echarts": "^4.7.0",
     "element-ui": "^2.13.0",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "vue": "^2.6.11",
+    "vue-echarts": "^5.0.0-beta.0",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"
   },

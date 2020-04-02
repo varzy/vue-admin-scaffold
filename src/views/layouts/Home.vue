@@ -185,13 +185,14 @@ export default {
 
   &-body {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
 
     &-header {
       padding-left: 16px;
       padding-right: 16px;
-      height: 72px;
+      height: 64px;
       flex-shrink: 0;
       background-color: #fff;
       display: flex;
@@ -225,6 +226,7 @@ export default {
       flex: 1;
       padding: 16px;
       overflow: auto;
+      min-height: 0;
 
       &-footer {
         margin-top: 64px;
