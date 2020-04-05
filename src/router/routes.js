@@ -17,15 +17,15 @@ export const navigation = [
     })
   },
   {
-    path: 'curd',
-    name: 'Curd',
+    path: 'crud',
+    name: 'Crud',
     component: Virtual,
-    redirect: { name: 'CurdTable' },
+    redirect: { name: 'CrudTable' },
     meta: new IRouteMeta({ title: '增删改查', icon: 'el-icon-s-management' }),
     children: [
       {
         path: 'table',
-        name: 'CurdTable',
+        name: 'CrudTable',
         component: _import('curd/Table'),
         meta: new IRouteMeta({ title: '表格' })
       }

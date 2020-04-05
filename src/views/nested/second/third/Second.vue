@@ -1,8 +1,8 @@
 <template>
   <div class="second_third_second">
-    <div>SecondThirdSecond</div>
-    <el-divider></el-divider>
-    <div>隐藏了面包屑导航栏</div>
+    <el-card header="SecondThirdSecond">
+      (╯°Д°)╯︵ ┻━┻ 我面包屑呢？我顶上那么长一条面包屑呢？！
+    </el-card>
   </div>
 </template>
 

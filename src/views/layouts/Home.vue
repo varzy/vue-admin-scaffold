@@ -1,19 +1,11 @@
 <template>
   <section class="layouts_home">
-    <aside
-      class="layouts_home-aside"
-      :style="{ backgroundColor: page.asideBgc, width: page.asideWidth + 'px' }"
-    >
+    <aside class="layouts_home-aside" :style="{ width: page.asideWidth + 'px' }">
       <div class="logo">
         <span class="logo-inner" @click="$router.push({ name: 'Index' })">{{ projectName }}</span>
       </div>
 
-      <el-menu
-        class="menu"
-        text-color="#eee"
-        :background-color="page.asideBgc"
-        :default-active="$route.name"
-      >
+      <el-menu class="menu" :default-active="$route.name">
         <navigation-item
           v-for="navigation in $store.state.view.navigation"
           :key="navigation.name"
@@ -84,8 +76,7 @@ export default {
       projectName: process.env.VUE_APP_PROJECT_NAME,
       userAvatar: require('@/assets/images/default_avatar.png'),
       page: {
-        asideWidth: 240,
-        asideBgc: '#35363a'
+        asideWidth: 256
       }
     };
   },
@@ -153,6 +144,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Gotu&display=swap');
+
+$bgc-aside: #001529;
+
 .layouts_home {
   position: relative;
   height: 100vh;
@@ -164,6 +159,7 @@ export default {
     flex-shrink: 0;
     box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
     z-index: 501;
+    background-color: $bgc-aside;
 
     .logo {
       height: 80px;
@@ -173,6 +169,9 @@ export default {
       font-weight: bold;
 
       &-inner {
+        letter-spacing: 0.1rem;
+        font-size: 20px;
+        font-family: 'Gotu', sans-serif;
         cursor: pointer;
       }
     }
@@ -180,6 +179,7 @@ export default {
     .menu {
       width: 100%;
       border-right: 0;
+      background-color: $bgc-aside;
     }
   }
 
@@ -254,6 +254,40 @@ export default {
 </style>
 
 <style lang="scss">
+/**
+ * 侧边导航菜单
+ */
+$bgc-aside: #001529;
+$bgc-not-root: #000c17;
+
+.layouts_home-aside .menu.el-menu {
+  .el-menu-item,
+  .el-submenu .el-submenu__title {
+    color: #b3b3b3;
+    background-color: $bgc-not-root;
+
+    &:hover {
+      color: #fff;
+      /*background-color: #25344b;*/
+    }
+  }
+
+  > .el-menu-item,
+  > .el-submenu > .el-submenu__title {
+    background-color: $bgc-aside;
+  }
+
+  .el-menu-item.is-active {
+    color: #fff;
+    background-color: $g-color-primary;
+  }
+}
+</style>
+
+<style lang="scss">
+/**
+ * 过渡动画
+ */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity $g-time-animation;

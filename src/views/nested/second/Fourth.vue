@@ -1,7 +1,7 @@
 <template>
   <div class="second_fourth">
-    <el-card shadow="hover" header="自定义面包屑">
-      <span>展示了自定义面包屑导航栏的能力。</span>
+    <el-card header="SecondFourth">
+      除了自动维护，你亦可 <del>赛艇</del> 对面包屑导航栏为所欲为。
     </el-card>
   </div>
 </template>

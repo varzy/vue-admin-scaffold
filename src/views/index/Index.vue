@@ -3,12 +3,17 @@
     <el-row :gutter="24">
       <el-col :span="12">
         <el-card shadow="hover" header="折线图">
-          <v-chart v-size:w="'100%'" v-size:h="400" :options="lineChartOptions"></v-chart>
+          <v-chart
+            autoresize
+            v-size:w="'100%'"
+            v-size:h="400"
+            :options="lineChartOptions"
+          ></v-chart>
         </el-card>
       </el-col>
       <el-col :span="12">
         <el-card shadow="hover" header="饼图">
-          <v-chart v-size:w="'100%'" v-size:h="400" :options="pieChartOptions"></v-chart>
+          <v-chart autoresize v-size:w="'100%'" v-size:h="400" :options="pieChartOptions"></v-chart>
         </el-card>
       </el-col>
     </el-row>
