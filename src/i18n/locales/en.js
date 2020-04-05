@@ -5,6 +5,7 @@ export default {
 
   hello: 'Hello',
   login: 'Login',
+  logout: 'Logout',
   unnamed: 'Unnamed',
   username: 'Username',
   password: 'Password',
@@ -30,14 +31,15 @@ export default {
     layout: {
       home: {
         unknown_action: 'Unknown Action',
-        you_triggered_an_action: 'You triggered an Action'
+        you_triggered_an_action: 'You triggered an Action',
+        logout: 'You have logged out.'
       }
     },
     login: {
       login_fail: 'Login fail. Please check your username and password.'
     },
     index: {
-      i18n_welcome: 'Support Vue I18n. You can change primary language at' + ' header area.'
+      i18n_welcome: 'hello, world'
     },
     readme: {
       documentation: 'Full Documentation'

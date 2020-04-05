@@ -39,7 +39,7 @@
               <i class="el-icon-arrow-down el-icon--right"></i>
 
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+                <el-dropdown-item command="logout">{{ $t('logout') }}</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -123,7 +123,7 @@ export default {
       if (willDo) {
         willDo();
       } else {
-        this.$message.error(this.$i18n.t('unknown_action'));
+        this.$message.error(this.$i18n.t('view.layout.home.unknown_action'));
       }
     },
     handleDropdownCommanded(command) {
@@ -136,13 +136,13 @@ export default {
     logout() {
       Permission.logout();
 
-      this.$message.success('你已退出登录');
+      this.$message.success(this.$i18n.t('view.layout.home.logout'));
       this.$router.push({ name: 'Login' });
     },
     sayHi() {
       this.$notify({
         title: 'hello, world',
-        message: this.$i18n.t('you_triggered_an_action')
+        message: this.$i18n.t('view.layout.home.you_triggered_an_action')
       });
     }
   }

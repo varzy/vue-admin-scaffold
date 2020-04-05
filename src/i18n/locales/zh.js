@@ -5,6 +5,7 @@ export default {
 
   hello: '你好',
   login: '登录',
+  logout: '退出登录',
   unnamed: '未命名',
   username: '用户名',
   password: '密码',
@@ -30,14 +31,15 @@ export default {
     layout: {
       home: {
         unknown_action: '未知的自定义事件',
-        you_triggered_an_action: '你触发了一个自定义事件'
+        you_triggered_an_action: '你触发了一个自定义事件',
+        logout: '你已退出登录'
       }
     },
     login: {
       login_fail: '登录失败。请检查你的用户名和密码。'
     },
     index: {
-      i18n_welcome: '支持 Vue I18n。你可以在右上角切换语言。'
+      i18n_welcome: '你好，世界'
     },
     readme: {
       documentation: '完整文档'
