@@ -284,6 +284,14 @@ $bgc-not-root: #1a2434;
     color: #fff;
     background-color: $g-color-primary;
   }
+
+  .el-menu-item [class^='iconfont'] {
+    margin-right: 5px;
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+    vertical-align: middle;
+  }
 }
 </style>
 
