@@ -52,7 +52,11 @@
         <footer class="layouts_home-body-main-footer">
           <span class="copyright">&copy; {{ new Date().getFullYear() }}</span>
           <el-divider direction="vertical"></el-divider>
-          <a class="me" href="https://varzy.me" target="_blank">Aiden Zhao</a>
+          <a class="link" href="https://github.com/varzy/vue-admin-scaffold" target="_blank"
+            >Github
+          </a>
+          <el-divider direction="vertical"></el-divider>
+          <a class="link" href="https://varzy.me" target="_blank">Aiden Zhao</a>
         </footer>
       </main>
     </section>
@@ -146,7 +150,7 @@ export default {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Gotu&display=swap');
 
-$bgc-aside: #001529;
+$bgc-aside: #283646;
 
 .layouts_home {
   position: relative;
@@ -207,15 +211,14 @@ $bgc-aside: #001529;
           align-items: center;
 
           &-avatar {
-            width: 48px;
-            height: 48px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            border: 1px solid #ddd;
           }
 
           &-name {
             cursor: pointer;
-
-            font-size: 16px;
             margin-left: 16px;
           }
         }
@@ -234,7 +237,7 @@ $bgc-aside: #001529;
         color: #666;
         font-size: 14px;
 
-        .me {
+        .link {
           text-decoration: none;
 
           &:link,
@@ -257,8 +260,8 @@ $bgc-aside: #001529;
 /**
  * 侧边导航菜单
  */
-$bgc-aside: #001529;
-$bgc-not-root: #000c17;
+$bgc-aside: #283646;
+$bgc-not-root: #1a2434;
 
 .layouts_home-aside .menu.el-menu {
   .el-menu-item,

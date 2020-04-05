@@ -56,19 +56,10 @@ export default {
         Array.from({ length: 7 }, () => _.random(_.random(100, 700), _.random(800, 2000)));
 
       this.lineChartOptions = new ChartOptionsGenerator({
-        legend: {
-          bottom: 0
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        xAxis: {
-          type: 'category',
-          boundaryGap: false
-        },
-        yAxis: {
-          type: 'value'
-        }
+        legend: { bottom: 0 },
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', boundaryGap: false },
+        yAxis: { type: 'value' }
       })
         .set('title.subtext', '展示了使用 ChartOptionsGenerator 链式操作生成 Echarts 配置的能力。')
         .set('legend.data', ['销量', '进货'])
@@ -89,6 +80,11 @@ export default {
         .set('series[1].type', 'line')
         .set('series[1].data', fakeData())
         .set('series[1].name', '进货')
+        .custom((options, _) => {
+          _.set(options, 'series[1].label.show', true);
+          _.set(options, 'series[0].areaStyle', {});
+          return options;
+        })
         .final();
 
       setInterval(() => {
