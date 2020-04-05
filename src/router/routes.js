@@ -10,7 +10,7 @@ export const navigation = [
     name: 'Index',
     component: _import('index/Index'),
     meta: new IRouteMeta({
-      title: '首页',
+      title: 'navigation.index',
       hideTitleInBrowserTab: true,
       hideInBreadcrumb: true,
       icon: 'el-icon-s-home'
@@ -20,20 +20,20 @@ export const navigation = [
     path: 'readme',
     name: 'Readme',
     component: _import('readme/Index'),
-    meta: new IRouteMeta({ title: 'README', icon: 'el-icon-s-management' })
+    meta: new IRouteMeta({ title: 'navigation.readme', icon: 'el-icon-s-management' })
   },
   {
     path: 'crud',
     name: 'Crud',
     component: Virtual,
     redirect: { name: 'CrudTable' },
-    meta: new IRouteMeta({ title: '增删改查', icon: 'el-icon-s-order' }),
+    meta: new IRouteMeta({ title: 'navigation.crud', icon: 'el-icon-s-order' }),
     children: [
       {
         path: 'table',
         name: 'CrudTable',
         component: _import('curd/Table'),
-        meta: new IRouteMeta({ title: '表格' })
+        meta: new IRouteMeta({ title: 'navigation.crud.table' })
       }
     ]
   },
@@ -41,25 +41,25 @@ export const navigation = [
     path: 'chart',
     name: 'Chart',
     component: _import('chart/Index'),
-    meta: new IRouteMeta({ title: '图表', icon: 'el-icon-s-marketing' })
+    meta: new IRouteMeta({ title: 'navigation.chart', icon: 'el-icon-s-marketing' })
   },
   {
     path: 'icon',
     name: 'Icon',
     component: Virtual,
-    meta: new IRouteMeta({ title: '图标', icon: 'el-icon-star-on' }),
+    meta: new IRouteMeta({ title: 'navigation.icon', icon: 'el-icon-star-on' }),
     children: [
       {
         path: 'iconfont',
         name: 'IconIconfont',
         component: _import('icon/Iconfont'),
-        meta: new IRouteMeta({ title: 'Iconfont 图标' })
+        meta: new IRouteMeta({ title: 'navigation.icon.iconfont' })
       },
       {
         path: 'local',
         name: 'IconLocal',
         component: _import('icon/Local'),
-        meta: new IRouteMeta({ title: '本地图标' })
+        meta: new IRouteMeta({ title: 'navigation.icon.local' })
       }
     ]
   },
@@ -68,7 +68,7 @@ export const navigation = [
     name: 'Nested',
     component: Virtual,
     redirect: { name: 'NestedFirst' },
-    meta: new IRouteMeta({ title: '嵌套 & 面包屑', icon: 'el-icon-s-promotion' }),
+    meta: new IRouteMeta({ title: 'navigation.nested', icon: 'el-icon-s-promotion' }),
     children: [
       {
         path: 'first',
@@ -130,7 +130,7 @@ export const navigation = [
     path: 'error',
     name: 'Error',
     component: Virtual,
-    meta: new IRouteMeta({ title: '错误', icon: 'el-icon-error' }),
+    meta: new IRouteMeta({ title: 'navigation.error', icon: 'el-icon-error' }),
     children: [
       {
         path: '404',
@@ -143,7 +143,11 @@ export const navigation = [
   {
     path: '-',
     name: 'Action',
-    meta: new IRouteMeta({ title: '自定义事件', action: 'SayHi', icon: 'el-icon-s-opportunity' })
+    meta: new IRouteMeta({
+      title: 'navigation.custom_action',
+      action: 'SayHi',
+      icon: 'el-icon-s-opportunity'
+    })
   }
 ];
 

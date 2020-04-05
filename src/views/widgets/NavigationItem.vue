@@ -56,7 +56,11 @@ export default {
 
   methods: {
     calcTitle(route) {
-      return (route.meta && route.meta.title) || '未命名';
+      if (route.meta && route.meta.title) {
+        return this.$i18n.te(route.meta.title) ? this.$i18n.t(route.meta.title) : route.meta.title;
+      } else {
+        return this.$i18n.t('unnamed');
+      }
     },
     calcShouldRenderIcon(type, route) {
       return (route.meta && route.meta.icon) || (this.level === 0 && type !== 'childItem');

@@ -5,6 +5,8 @@ import { navigation } from '@/router/routes';
 import { cloneDeep as _cloneDeep } from 'lodash';
 import Permission from '@/utils/Permission';
 import { ls } from '@/utils/Storage';
+import { PRIMARY_LOCALE } from '@/config/constants';
+import { loadLanguage } from '@/i18n';
 
 NProgress.configure({ showSpinner: false });
 
@@ -49,6 +51,14 @@ Router.beforeEach(async (to, from, next) => {
 
   Store.commit('view/UNSET_CUSTOM_BREADCRUMB');
   Store.commit('view/UPDATE_HOME_BREADCRUMB_VISIBLE', to.meta && !to.meta.hideHomeBreadcrumb);
+
+  /**
+   * i18n
+   */
+  if (!ls.get('lang')) {
+    ls.set('lang', PRIMARY_LOCALE);
+  }
+  await loadLanguage(ls.get('lang'));
 
   /**
    * 浏览器标签页标题

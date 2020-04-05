@@ -1,22 +1,25 @@
 import { ls } from '@/utils/Storage';
 import IUserInfo from '@/models/IUserInfo';
+import { reqLogin } from '@/api/mock';
 
 export default class Permission {
-  /**
-   *
-   * @returns {boolean}
-   */
   static isLogin() {
     return !!ls.get('user');
   }
 
-  static login() {
+  static async login(loginData) {
+    const { data } = await reqLogin(loginData);
+
+    if (data.status !== 0) {
+      throw new Error('login_fail');
+    }
+
     ls.set(
       'user',
       new IUserInfo({
         id: 1,
         username: 'username',
-        name: '游客'
+        name: 'Nickname'
       })
     );
   }

@@ -20,19 +20,21 @@
       <header class="layouts_home-body-header">
         <div class="left">
           <el-breadcrumb class="breadcrumb" v-show="$store.state.view.homeBreadcrumbVisible">
-            <el-breadcrumb-item :to="{ name: 'Index' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ name: 'Index' }">
+              {{ $t('navigation.index') }}
+            </el-breadcrumb-item>
             <el-breadcrumb-item v-for="(breadcrumb, index) in calcBreadcrumb" :key="index">
               <router-link v-if="breadcrumb.enabled" :to="breadcrumb.route">
-                {{ breadcrumb.title }}
+                {{ calcBreadcrumbTitle(breadcrumb.title) }}
               </router-link>
-              <span v-else>{{ breadcrumb.title }}</span>
+              <span v-else>{{ calcBreadcrumbTitle(breadcrumb.title) }}</span>
             </el-breadcrumb-item>
           </el-breadcrumb>
         </div>
         <div class="right">
+          <el-image class="avatar" :src="userAvatar"></el-image>
           <div class="user">
-            <el-image class="user-avatar" :src="userAvatar"></el-image>
-            <el-dropdown size="medium" @command="handleDropdownCommanded">
+            <el-dropdown size="medium" :show-timeout="0" @command="handleDropdownCommanded">
               <span class="user-name">{{ $store.state.user.userInfo.name }}</span>
               <i class="el-icon-arrow-down el-icon--right"></i>
 
@@ -40,6 +42,9 @@
                 <el-dropdown-item command="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
+          </div>
+          <div class="locale">
+            <language-selector></language-selector>
           </div>
         </div>
       </header>
@@ -49,15 +54,7 @@
           <router-view />
         </transition>
 
-        <footer class="layouts_home-body-main-footer">
-          <span class="copyright">&copy; {{ new Date().getFullYear() }}</span>
-          <el-divider direction="vertical"></el-divider>
-          <a class="link" href="https://github.com/varzy/vue-admin-scaffold" target="_blank"
-            >Github
-          </a>
-          <el-divider direction="vertical"></el-divider>
-          <a class="link" href="https://varzy.me" target="_blank">Aiden Zhao</a>
-        </footer>
+        <page-footer class="layouts_home-body-main-footer"></page-footer>
       </main>
     </section>
   </section>
@@ -65,6 +62,8 @@
 
 <script>
 import NavigationItem from '../widgets/NavigationItem';
+import LanguageSelector from '../widgets/LanguageSelector';
+import PageFooter from '../widgets/Footer';
 import { PRIMARY_COLOR } from '../../config/constants';
 import Permission from '../../utils/Permission';
 import IBreadcrumbItem from '../../models/IBreadcrumbItem';
@@ -72,7 +71,7 @@ import IBreadcrumbItem from '../../models/IBreadcrumbItem';
 export default {
   name: 'LayoutHome',
 
-  components: { NavigationItem },
+  components: { NavigationItem, LanguageSelector, PageFooter },
 
   data() {
     return {
@@ -97,7 +96,7 @@ export default {
           route =>
             new IBreadcrumbItem({
               route,
-              title: route.meta && route.meta.title ? route.meta.title : '未命名',
+              title: route.meta && route.meta.title ? route.meta.title : 'unnamed',
               enabled: route.meta && !route.meta.disabledInBreadcrumb
             })
         );
@@ -105,6 +104,9 @@ export default {
   },
 
   methods: {
+    calcBreadcrumbTitle(title) {
+      return this.$i18n.te(title) ? this.$i18n.t(title) : title;
+    },
     handleMenuItemClick(route) {
       const routeAction = route.meta.action;
 
@@ -121,12 +123,12 @@ export default {
       if (willDo) {
         willDo();
       } else {
-        this.$message.error('未知的自定义事件');
+        this.$message.error(this.$i18n.t('unknown_action'));
       }
     },
     handleDropdownCommanded(command) {
       const relation = {
-        logout: this.logout()
+        logout: () => this.logout()
       };
 
       if (relation[command]) relation[command]();
@@ -140,7 +142,7 @@ export default {
     sayHi() {
       this.$notify({
         title: 'hello, world',
-        message: '你触发了一个自定义事件'
+        message: this.$i18n.t('you_triggered_an_action')
       });
     }
   }
@@ -206,21 +208,24 @@ $bgc-aside: #283646;
       z-index: 500;
 
       .right {
+        display: flex;
+        align-items: center;
+
+        .avatar {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 1px solid #ddd;
+        }
+
         .user {
-          display: flex;
-          align-items: center;
+          margin-left: 16px;
+          cursor: pointer;
+        }
 
-          &-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid #ddd;
-          }
-
-          &-name {
-            cursor: pointer;
-            margin-left: 16px;
-          }
+        .locale {
+          margin-left: 16px;
+          cursor: pointer;
         }
       }
     }
@@ -233,23 +238,6 @@ $bgc-aside: #283646;
 
       &-footer {
         margin-top: 64px;
-        text-align: center;
-        color: #666;
-        font-size: 14px;
-
-        .link {
-          text-decoration: none;
-
-          &:link,
-          &:visited {
-            color: #666;
-          }
-
-          &:hover,
-          &:active {
-            color: $g-color-primary;
-          }
-        }
       }
     }
   }
@@ -283,14 +271,6 @@ $bgc-not-root: #1a2434;
   .el-menu-item.is-active {
     color: #fff;
     background-color: $g-color-primary;
-  }
-
-  .el-menu-item [class^='iconfont'] {
-    margin-right: 5px;
-    width: 24px;
-    text-align: center;
-    font-size: 18px;
-    vertical-align: middle;
   }
 }
 </style>
