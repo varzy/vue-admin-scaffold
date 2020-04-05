@@ -50,21 +50,12 @@ export default {
     i {
       font-size: 32px;
       margin-right: 16px;
-
-      &:last-child {
-        margin-right: 0;
-      }
     }
   }
 
   .by_component {
     .item {
-      font-size: 32px;
       margin-right: 16px;
-
-      &:last-child {
-        margin-right: 0;
-      }
     }
   }
 }

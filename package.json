@@ -5,15 +5,15 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --modern",
-    "build:report": "vue-cli-service build --modern --report",
     "test:unit": "vue-cli-service test:unit",
-    "lint:preset": "vue-cli-service lint",
-    "lint:additional": "prettier --write src/**/*.{css,scss,sass,json}",
     "lint": "npm run lint:preset && npm run lint:additional",
     "deploy": "bash deploy.sh",
-    "docs:dev": "vuepress dev docs",
+    "build:report": "vue-cli-service build --modern --report",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "bash ./docs/deploy.sh"
+    "docs:deploy": "bash ./docs/deploy.sh",
+    "docs:dev": "vuepress dev docs",
+    "lint:additional": "prettier --write src/**/*.{css,scss,sass,json}",
+    "lint:preset": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -46,6 +46,9 @@
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
+    "svgo": "^1.1.0",
+    "svgo-loader": "^2.1.0",
+    "vue-cli-plugin-svg-sprite": "~1.0.0",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.4.0"
   }
