@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "iconfont";
+  src: url("iconfont.eot?t=1586065555460"); /* IE9 */
+  src: url("iconfont.eot?t=1586065555460#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */
+      url("data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAQMAAsAAAAACRQAAAPAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDXAqEUINfATYCJAMgCxIABCAFhG0HcBvJB8gekiT1ACyIOMBFVwBAPPw39//uk5nk5s39yApREbVVnBSIFFDWqqpC1arqVyOeLkgimYIsq/zvmv4iCxPfdqymCNUOBnjwc71S7qUZkibJHkioCQUoN2H25pdSL8FnY6oL5JoKhVd8V2+QYWMhpyfUhAMGZUiYGes3jF1e5NUEih1yXFd6hmQIyvSdAvG0bWkQTMRkmRVboSk4Mot31drq7eoL4B3v9+MPTdFSqRP9Wjc+2m1C21gdL9IwDe5Og2E4D9hxJBwEMvFSoe9FniB3kEeR1/e6BihalWqoXmc8HC+miYi2P56rNqQrhm4F+pdXSbJaY0Y09MZl4GGcnzFWLUQwOoiKcR+RGA8QmfEQUTOeIxrGi2eYgRasAjYBH+MXSFjnW6YyGrIQWdeusM2rGmhpG/+gdWtW3MvTg7Fq2V0RpSOSpKaLCK/ud4/LsihVScvNY/5oYeaJcMw7q+O2RL0iKxGa65VQI3/r3KcgvTC/Z0KzvKsiy8sq9SumTjvviFTlvkgud3mZh6Jx20RLSixft9yhQLQqj6kjimExXL2sjooNj++WrE7dkL+oi/sGy+IUWLo3s5ZPOR7clHq6v3ypP/ClDP1X8LX5lbJ/o8y9/0tFr/iUb1VUcMQwcjX0g2n8xLuBfv9lD27d9/654vBHd967NJO50+ytuNrwqxw5bu/obG45OvChbv9VD/rFroeW6c0pLNNicAaPSxeGpesPO2xzwDA8R8XxMw8XLmy6fuvLc9c9XLP2q/c6Wf7/j5vBuft6vzLX3Hf988s03Qw8YBqSMcD0afozPfNP/I3/78pM4szf7TyD7+/e+8DrmYYsDbxYvcbyP0DecFFWlLq9zdLsrAGB1qkb/IUKRcHbD63xM6RhfeMMoU3IGVRmtkPS2onJhINQmzsJjdZ5KA7o9c+t/acG8gL224MQVrmDygpLkKzyhMmEb6ht8AeNVZGguDXWnnFudzwRvsxRE2gSfYnYBqtS0ynCfvMwWnNljceVHl1FXrOTpLGuIV3sxSryIfapzVtNQlBCOauQHnA9LJcZcTgroiHqCkI4rfX1tOiT6gxWgbDLOKQRkInQLSFsBqaKOisL4czPD0OWOWUaXjFVFlUhrsZeO9GoTkMDTK+u2mjqUtavmWdpIggUb0dxTAXRAz2obOQYwinerAgZhDqFDhlHq3q0HG2qq5veULnTq6DQ36eNKlLkqKOJWbSxoHmBG8xEz0NzIvxQQeMir52nImSX7SqG1Lot4H1Ws8vhrjy1F9EEAA==")
+      format("woff2"),
+    url("iconfont.woff?t=1586065555460") format("woff"),
+    url("iconfont.ttf?t=1586065555460") format("truetype"),
+    /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+      url("iconfont.svg?t=1586065555460#iconfont") format("svg"); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconfont-qrcode:before {
+  content: "\e76e";
+}
+
+.iconfont-cut:before {
+  content: "\e770";
+}
+
+.iconfont-chart-area:before {
+  content: "\e78f";
+}
+
+.iconfont-chart-line:before {
+  content: "\e790";
+}
+
+.iconfont-chart-bar:before {
+  content: "\e791";
+}
+
+.iconfont-nail:before {
+  content: "\e79e";
+}
+
+.iconfont-nail-fixed:before {
+  content: "\e79f";
+}

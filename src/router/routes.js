@@ -17,11 +17,17 @@ export const navigation = [
     })
   },
   {
+    path: 'readme',
+    name: 'Readme',
+    component: _import('readme/Index'),
+    meta: new IRouteMeta({ title: 'README', icon: 'el-icon-s-management' })
+  },
+  {
     path: 'crud',
     name: 'Crud',
     component: Virtual,
     redirect: { name: 'CrudTable' },
-    meta: new IRouteMeta({ title: '增删改查', icon: 'el-icon-s-management' }),
+    meta: new IRouteMeta({ title: '增删改查', icon: 'el-icon-s-order' }),
     children: [
       {
         path: 'table',
@@ -32,11 +38,37 @@ export const navigation = [
     ]
   },
   {
+    path: 'chart',
+    name: 'Chart',
+    component: _import('chart/Index'),
+    meta: new IRouteMeta({ title: '图表', icon: 'el-icon-s-marketing' })
+  },
+  {
+    path: 'icon',
+    name: 'Icon',
+    component: Virtual,
+    meta: new IRouteMeta({ title: '图标', icon: 'el-icon-star-on' }),
+    children: [
+      {
+        path: 'iconfont',
+        name: 'IconIconfont',
+        component: _import('icon/Iconfont'),
+        meta: new IRouteMeta({ title: 'Iconfont 图标' })
+      },
+      {
+        path: 'local',
+        name: 'IconLocal',
+        component: _import('icon/Local'),
+        meta: new IRouteMeta({ title: '本地图标' })
+      }
+    ]
+  },
+  {
     path: 'nested',
     name: 'Nested',
     component: Virtual,
     redirect: { name: 'NestedFirst' },
-    meta: new IRouteMeta({ title: '嵌套导航栏 & 面包屑', icon: 'el-icon-s-promotion' }),
+    meta: new IRouteMeta({ title: '嵌套 & 面包屑', icon: 'el-icon-s-promotion' }),
     children: [
       {
         path: 'first',
