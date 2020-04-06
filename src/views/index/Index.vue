@@ -1,13 +1,24 @@
 <template>
   <div class="index">
-    <el-card header="i18n">
-      {{ $t('view.index.i18n_welcome') }}
+    <el-card class="readme">
+      <markdown-article :md="readme"></markdown-article>
     </el-card>
   </div>
 </template>
 
 <script>
+import MarkdownArticle from '../../components/MarkdownArticle';
+import ReadmeDoc from '../../../README.md';
+
 export default {
-  name: 'Index'
+  name: 'Index',
+
+  components: { MarkdownArticle },
+
+  data() {
+    return {
+      readme: ReadmeDoc
+    };
+  }
 };
 </script>

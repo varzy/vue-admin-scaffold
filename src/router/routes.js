@@ -17,10 +17,10 @@ export const navigation = [
     })
   },
   {
-    path: 'readme',
-    name: 'Readme',
-    component: _import('readme/Index'),
-    meta: new IRouteMeta({ title: 'navigation.readme', icon: 'el-icon-s-management' })
+    path: 'documentation',
+    name: 'Documentation',
+    component: _import('documentation/Index'),
+    meta: new IRouteMeta({ title: 'navigation.documentation', icon: 'el-icon-s-management' })
   },
   {
     path: 'crud',

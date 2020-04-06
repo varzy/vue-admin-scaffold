@@ -12,7 +12,7 @@ export default {
 
   // navigation
   'navigation.index': '首页',
-  'navigation.readme': 'README',
+  'navigation.documentation': '文档',
   'navigation.crud': '增删改查',
   'navigation.crud.table': '表格风格',
   'navigation.chart': '图表',
@@ -37,12 +37,6 @@ export default {
     },
     login: {
       login_fail: '登录失败。请检查你的用户名和密码。'
-    },
-    index: {
-      i18n_welcome: '你好，世界'
-    },
-    readme: {
-      documentation: '完整文档'
     }
   }
 };

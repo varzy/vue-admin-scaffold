@@ -12,7 +12,7 @@ export default {
 
   // navigation
   'navigation.index': 'Dashboard',
-  'navigation.readme': 'README',
+  'navigation.documentation': 'Documentation',
   'navigation.crud': 'CRUD',
   'navigation.crud.table': 'Table Style',
   'navigation.chart': 'Charts',
@@ -37,12 +37,6 @@ export default {
     },
     login: {
       login_fail: 'Login fail. Please check your username and password.'
-    },
-    index: {
-      i18n_welcome: 'hello, world'
-    },
-    readme: {
-      documentation: 'Full Documentation'
     }
   }
 };

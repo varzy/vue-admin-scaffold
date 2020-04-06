@@ -32,6 +32,12 @@ module.exports = {
       .use('i18n')
       .loader('@kazupon/vue-i18n-loader')
       .end();
+
+    config.module
+      .rule('raw')
+      .test(/\.md$/)
+      .use('raw-loader')
+      .loader('raw-loader');
   },
   pluginOptions: {
     svgSprite: {

@@ -1,9 +1,7 @@
 <template>
-  <div class="readme">
-    <el-card header="README">
-      <el-button type="primary" @click="onOpenDocumention">{{
-        $t('view.readme.documentation')
-      }}</el-button>
+  <div class="documentation">
+    <el-card>
+      <el-button size="large" type="primary" @click="onOpenDocumentation">完整文档</el-button>
       <iframe class="frame" frameborder="0" :src="documentAddress"></iframe>
     </el-card>
   </div>
@@ -11,7 +9,7 @@
 
 <script>
 export default {
-  name: 'Readme',
+  name: 'Documentation',
 
   data() {
     return {
@@ -20,7 +18,7 @@ export default {
   },
 
   methods: {
-    onOpenDocumention() {
+    onOpenDocumentation() {
       window.open(this.documentAddress, '_blank');
     }
   }
@@ -28,7 +26,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.readme {
+.documentation {
   .frame {
     margin-top: 24px;
     width: 100%;
