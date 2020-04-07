@@ -32,7 +32,7 @@ export const navigation = [
       {
         path: 'table',
         name: 'CrudTable',
-        component: _import('curd/Table'),
+        component: _import('crud/Table'),
         meta: new IRouteMeta({ title: 'navigation.crud.table' })
       }
     ]
