@@ -1,17 +1,3 @@
-<template>
-  <div class="index">
-    <el-card class="readme">
-      <markdown-article :md="readme"></markdown-article>
-    </el-card>
-
-    <github-corner
-      url="https://github.com/varzy/vue-admin-scaffold"
-      :position="{ position: 'absolute', top: '-16px', right: '-16px' }"
-      :bg-color="primaryColor"
-    ></github-corner>
-  </div>
-</template>
-
 <script>
 import MarkdownArticle from '../../components/MarkdownArticle';
 import ReadmeDoc from '../../../README.md';
@@ -25,9 +11,24 @@ export default {
 
   data() {
     return {
-      primaryColor: PRIMARY_COLOR,
       readme: ReadmeDoc
     };
+  },
+
+  render() {
+    return (
+      <div class="index">
+        <ElCard class="readme">
+          <MarkdownArticle md={this.readme} />
+        </ElCard>
+
+        <GithubCorner
+          url="https://github.com/varzy/vue-admin-scaffold"
+          position={{ position: 'absolute', top: '-16px', right: '-16px' }}
+          bgColor={PRIMARY_COLOR}
+        ></GithubCorner>
+      </div>
+    );
   }
 };
 </script>

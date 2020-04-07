@@ -1,7 +1,3 @@
-<template>
-  <div class="hello_world">{{ words }}</div>
-</template>
-
 <script>
 export default {
   name: 'HelloWorld',
@@ -15,6 +11,10 @@ export default {
 
   created() {
     console.log(this.words);
+  },
+
+  render() {
+    return <div class="hello_world">{this.words}</div>;
   }
 };
 </script>
