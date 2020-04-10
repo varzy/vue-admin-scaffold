@@ -1,6 +1,7 @@
 <script>
 import MarkdownArticle from '../../components/MarkdownArticle';
-import ReadmeDoc from '../../../README.md';
+import ReadmeZh from '../../../README.md';
+import ReadmeEn from '../../../README.en.md';
 import GithubCorner from '../../components/GithubCorner';
 import { PRIMARY_COLOR } from '../../config/constants';
 
@@ -9,17 +10,17 @@ export default {
 
   components: { MarkdownArticle, GithubCorner },
 
-  data() {
-    return {
-      readme: ReadmeDoc
-    };
+  computed: {
+    calcReadmeSource() {
+      return this.$store.state.lang.chosenLang === 'en' ? ReadmeEn : ReadmeZh;
+    }
   },
 
   render() {
     return (
       <div class="index">
         <ElCard class="readme">
-          <MarkdownArticle md={this.readme} />
+          <MarkdownArticle md={this.calcReadmeSource} />
         </ElCard>
 
         <GithubCorner

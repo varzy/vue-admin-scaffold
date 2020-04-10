@@ -6,22 +6,13 @@ export default {
 
   props: {
     md: {
-      type: String
+      type: String,
+      required: true
     }
   },
 
-  data() {
-    return {
-      mdHtml: ''
-    };
-  },
-
-  mounted() {
-    this.mdHtml = Marked(this.md);
-  },
-
   render() {
-    return <article class="markdown_article" domPropsInnerHTML={this.mdHtml}></article>;
+    return <article class="markdown_article" domPropsInnerHTML={Marked(this.md)}></article>;
   }
 };
 </script>
