@@ -23,47 +23,6 @@ export const navigation = [
     meta: new IRouteMeta({ title: 'navigation.documentation', icon: 'el-icon-s-management' })
   },
   {
-    path: 'crud',
-    name: 'Crud',
-    component: Virtual,
-    redirect: { name: 'CrudTable' },
-    meta: new IRouteMeta({ title: 'navigation.crud', icon: 'el-icon-s-order' }),
-    children: [
-      {
-        path: 'table',
-        name: 'CrudTable',
-        component: _import('crud/Table'),
-        meta: new IRouteMeta({ title: 'navigation.crud.table' })
-      }
-    ]
-  },
-  {
-    path: 'chart',
-    name: 'Chart',
-    component: _import('chart/Index'),
-    meta: new IRouteMeta({ title: 'navigation.chart', icon: 'el-icon-s-marketing' })
-  },
-  {
-    path: 'icon',
-    name: 'Icon',
-    component: Virtual,
-    meta: new IRouteMeta({ title: 'navigation.icon', icon: 'el-icon-star-on' }),
-    children: [
-      {
-        path: 'iconfont',
-        name: 'IconIconfont',
-        component: _import('icon/Iconfont'),
-        meta: new IRouteMeta({ title: 'navigation.icon.iconfont' })
-      },
-      {
-        path: 'local',
-        name: 'IconLocal',
-        component: _import('icon/Local'),
-        meta: new IRouteMeta({ title: 'navigation.icon.local' })
-      }
-    ]
-  },
-  {
     path: 'nested',
     name: 'Nested',
     component: Virtual,
@@ -123,6 +82,47 @@ export const navigation = [
             meta: new IRouteMeta({ title: 'SecondFourth' })
           }
         ]
+      }
+    ]
+  },
+  {
+    path: 'crud',
+    name: 'Crud',
+    component: Virtual,
+    redirect: { name: 'CrudTable' },
+    meta: new IRouteMeta({ title: 'navigation.crud', icon: 'el-icon-s-order' }),
+    children: [
+      {
+        path: 'table',
+        name: 'CrudTable',
+        component: _import('crud/Table'),
+        meta: new IRouteMeta({ title: 'navigation.crud.table' })
+      }
+    ]
+  },
+  {
+    path: 'chart',
+    name: 'Chart',
+    component: _import('chart/Index'),
+    meta: new IRouteMeta({ title: 'navigation.chart', icon: 'el-icon-s-marketing' })
+  },
+  {
+    path: 'icon',
+    name: 'Icon',
+    component: Virtual,
+    meta: new IRouteMeta({ title: 'navigation.icon', icon: 'el-icon-star-on' }),
+    children: [
+      {
+        path: 'iconfont',
+        name: 'IconIconfont',
+        component: _import('icon/Iconfont'),
+        meta: new IRouteMeta({ title: 'navigation.icon.iconfont' })
+      },
+      {
+        path: 'local',
+        name: 'IconLocal',
+        component: _import('icon/Local'),
+        meta: new IRouteMeta({ title: 'navigation.icon.local' })
       }
     ]
   },
