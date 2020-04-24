@@ -9,7 +9,7 @@ const axiosResponseSchema = data => ({
 export const reqLogin = async data => {
   await asyncTimeout(600);
 
-  return data.username === 'admin' && data.password === 'qaz123'
+  return data.username === 'admin' && data.password === '123456'
     ? axiosResponseSchema({
         status: 0,
         message: 'Success'

@@ -22,7 +22,7 @@
         <el-form-item prop="password">
           <el-input
             type="password"
-            :placeholder="`${$t('password')}: qaz123`"
+            :placeholder="`${$t('password')}: 123456`"
             prefix-icon="el-icon-lock"
             v-model="form.password"
             @keydown.enter.native="onLogin"
@@ -64,7 +64,7 @@ export default {
       isSubmitting: false,
       projectName: process.env.VUE_APP_PROJECT_NAME,
       form: {
-        username: '',
+        username: 'admin',
         password: ''
       },
       formRules: {

@@ -24,6 +24,45 @@ In addition, even it is a very formulaic backstage system, there will be a drast
 
 It is strongly not recommended that you clone the project and change it directly. If you're interested in certain features, just take the code you need.
 
+## Roadmap
+
+- Basic Building
+  - [x] Code Formatter
+  - [x] Global scss variables and scss mixins
+  - [x] Scss combination
+  - [x] Folders combination
+- Router & Layout
+  - [x] The component lazy loader: importer.js
+  - [x] Unlimited levels of navigation bar based on routing configuration
+  - [x] The basic layout component: Home.vue
+  - [x] Page transitions effect & NProgress
+  - [x] Automatically maintained breadcrumb navigation bar according by routing configuration
+  - [x] Automatically update the browser's tab title based on the routing configuration
+  - [ ] The expansion and contraction effect of sidebar
+  - [ ] Drag to change the width of the sidebar
+  - [x] Automatic jump to 404 page
+  - [ ] Multi-tab effect
+- Permission
+  - [x] Login interception
+  - [ ] (RBAC) Generate different navigation bar menus based on user's role
+  - [ ] (RBAC) Reveal page elements based on user's role
+- Tools
+  - [x] Echarts configuration generator: ChartOptionsGenerator.js
+  - [x] i18n
+  - [x] Http module based on Axios
+  - [x] Storage module encapsulating localStorage and sessionStorage
+  - [x] Ali's Iconfont icons
+  - [x] Using local svg icons
+  - [ ] Form validation of ElementUI
+- Emphasis & Difficulty
+  - [ ] CRUD and Pagination effects of table style
+  - [ ] Right-click menu
+  - [ ] Mouse drag api
+- Others
+  - [ ] Typescript support
+  - [ ] The Mocking of Api
+  - [ ] Project's documentation
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
