@@ -10,7 +10,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 3000,
+    port: 4000,
     proxy: {
       // 模拟接口的 Nginx 反代
       [process.env.VUE_APP_BASE_URL_API]: {
