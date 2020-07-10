@@ -1,60 +1,74 @@
 <template>
   <section class="layouts_home">
-    <aside class="layouts_home-aside" :style="{ width: page.asideWidth + 'px' }">
-      <div class="logo">
-        <span class="logo-inner" @click="$router.push({ name: 'Index' })">{{ projectName }}</span>
+    <header class="layouts_home-header">
+      <div class="left">
+        <div class="logo">
+          <span class="logo-inner" @click="$router.push({ name: 'Index' })">{{ projectName }}</span>
+        </div>
       </div>
 
-      <el-menu class="menu" :default-active="$route.name">
-        <navigation-item
-          v-for="navigation in $store.state.view.navigation"
-          :key="navigation.name"
-          :route="navigation"
-          @node-click="handleMenuItemClick"
-        >
-        </navigation-item>
-      </el-menu>
-    </aside>
+      <div class="right">
+        <el-image class="avatar" :src="userAvatar"></el-image>
+        <div class="user">
+          <el-dropdown size="medium" :show-timeout="0" @command="handleDropdownCommanded">
+            <span class="user-label">{{ $store.state.user.userInfo.name }}</span>
+            <i class="el-icon-arrow-down el-icon--right"></i>
+
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="logout">{{ $t('logout') }}</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+        <div class="locale">
+          <language-selector label-color="#fff"></language-selector>
+        </div>
+      </div>
+    </header>
 
     <section class="layouts_home-body">
-      <header class="layouts_home-body-header">
-        <div class="left">
-          <el-breadcrumb class="breadcrumb" v-show="$store.state.view.homeBreadcrumbVisible">
-            <el-breadcrumb-item :to="{ name: 'Index' }">
-              {{ $t('navigation.index') }}
-            </el-breadcrumb-item>
-            <el-breadcrumb-item v-for="(breadcrumb, index) in calcBreadcrumb" :key="index">
-              <router-link v-if="breadcrumb.enabled" :to="breadcrumb.route">
-                {{ calcBreadcrumbTitle(breadcrumb.title) }}
-              </router-link>
-              <span v-else>{{ calcBreadcrumbTitle(breadcrumb.title) }}</span>
-            </el-breadcrumb-item>
-          </el-breadcrumb>
-        </div>
-        <div class="right">
-          <el-image class="avatar" :src="userAvatar"></el-image>
-          <div class="user">
-            <el-dropdown size="medium" :show-timeout="0" @command="handleDropdownCommanded">
-              <span class="user-name">{{ $store.state.user.userInfo.name }}</span>
-              <i class="el-icon-arrow-down el-icon--right"></i>
+      <aside class="layouts_home-body-aside">
+        <el-menu class="menu" :default-active="$route.name" :collapse="isAsideCollapsed">
+          <navigation-item
+            v-for="navigation in $store.state.view.navigation"
+            :key="navigation.name"
+            :route="navigation"
+            @node-click="handleMenuItemClick"
+          >
+          </navigation-item>
+        </el-menu>
 
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="logout">{{ $t('logout') }}</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-          <div class="locale">
-            <language-selector></language-selector>
-          </div>
+        <div class="collapse">
+          <i
+            :class="[
+              'el-icon-s-fold',
+              'collapse-icon',
+              { 'collapse-icon-collapsed': isAsideCollapsed }
+            ]"
+            @click="isAsideCollapsed = !isAsideCollapsed"
+          ></i>
         </div>
-      </header>
+      </aside>
 
       <main class="layouts_home-body-main">
-        <transition name="fade" mode="out-in">
-          <router-view />
-        </transition>
+        <el-breadcrumb class="breadcrumb" v-show="$store.state.view.homeBreadcrumbVisible">
+          <el-breadcrumb-item :to="{ name: 'Index' }">
+            {{ $t('navigation.index') }}
+          </el-breadcrumb-item>
+          <el-breadcrumb-item v-for="(breadcrumb, index) in calcBreadcrumb" :key="index">
+            <router-link v-if="breadcrumb.enabled" :to="breadcrumb.route">
+              {{ calcBreadcrumbTitle(breadcrumb.title) }}
+            </router-link>
+            <span v-else>{{ calcBreadcrumbTitle(breadcrumb.title) }}</span>
+          </el-breadcrumb-item>
+        </el-breadcrumb>
 
-        <page-footer class="layouts_home-body-main-footer"></page-footer>
+        <div class="container">
+          <transition name="fade" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
+
+        <page-footer class="footer"></page-footer>
       </main>
     </section>
   </section>
@@ -78,9 +92,7 @@ export default {
       menuActiveColor: PRIMARY_COLOR,
       projectName: process.env.VUE_APP_PROJECT_NAME,
       userAvatar: require('@/assets/images/default_avatar.png'),
-      page: {
-        asideWidth: 256
-      }
+      isAsideCollapsed: false
     };
   },
 
@@ -153,90 +165,121 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Gotu&display=swap');
 
 $bgc-aside: #283646;
+$bgc-header: #fff;
+$height-header: 56px;
+$width-aside: 232px;
 
 .layouts_home {
   position: relative;
   height: 100vh;
   background-color: $g-color-background;
-  display: flex;
 
-  &-aside {
-    overflow: auto;
-    flex-shrink: 0;
-    box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-    z-index: 501;
-    background-color: $bgc-aside;
+  &-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: $height-header;
+    z-index: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $bgc-header;
+    padding-left: 24px;
+    padding-right: 24px;
+    box-shadow: 0 2px 6px rgba(0, 21, 41, 0.08);
 
-    .logo {
-      height: 80px;
-      line-height: 80px;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
+    .left {
+      display: flex;
+      align-items: center;
 
-      &-inner {
-        letter-spacing: 0.1rem;
-        font-size: 20px;
-        font-family: 'Gotu', sans-serif;
-        cursor: pointer;
+      .logo {
+        &-inner {
+          cursor: pointer;
+        }
       }
     }
 
-    .menu {
-      width: 100%;
-      border-right: 0;
-      background-color: $bgc-aside;
+    .right {
+      display: flex;
+      align-items: center;
+
+      .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+      }
+
+      .user {
+        margin-left: 16px;
+        cursor: pointer;
+      }
+
+      .locale {
+        margin-left: 16px;
+        cursor: pointer;
+      }
     }
   }
 
   &-body {
-    flex: 1;
-    min-width: 0;
+    box-sizing: border-box;
+    padding-top: $height-header;
+    height: 100%;
     display: flex;
-    flex-direction: column;
 
-    &-header {
-      padding-left: 16px;
-      padding-right: 16px;
-      height: 64px;
+    &-aside {
+      height: 100%;
       flex-shrink: 0;
-      background-color: #fff;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 6px rgba(0, 21, 41, 0.08);
-      z-index: 500;
+      flex-direction: column;
+      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.08);
 
-      .right {
+      .menu {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-right: 0;
+
+        &:not(.el-menu--collapse) {
+          width: $width-aside;
+        }
+      }
+
+      .collapse {
+        border-top: 1px solid #f0f0f0;
+        height: 40px;
         display: flex;
         align-items: center;
+        background-color: #fff;
+        padding-left: 20px;
 
-        .avatar {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          border: 1px solid #ddd;
-        }
+        &-icon {
+          font-size: 20px;
+          color: #909399;
+          transition: all 0.2s ease-in-out;
+          transform: rotate(0deg);
 
-        .user {
-          margin-left: 16px;
-          cursor: pointer;
-        }
-
-        .locale {
-          margin-left: 16px;
-          cursor: pointer;
+          &-collapsed {
+            transform: rotate(180deg);
+          }
         }
       }
     }
 
     &-main {
+      box-sizing: border-box;
+      height: 100%;
       flex: 1;
+      overflow-y: auto;
       padding: 16px;
-      overflow: auto;
-      min-height: 0;
 
-      &-footer {
+      .breadcrumb {
+        margin-bottom: 16px;
+      }
+
+      .footer {
         margin-top: 64px;
       }
     }
@@ -248,18 +291,20 @@ $bgc-aside: #283646;
 /**
  * 侧边导航菜单
  */
-$bgc-aside: #283646;
-$bgc-not-root: #1a2434;
+$bgc-aside: #fff;
+$bgc-not-root: #f9f9f9;
+$color-inactive: #333;
+$color-hover: $g-color-primary;
+$color-active: #fff;
 
-.layouts_home-aside .menu.el-menu {
+.layouts_home-body-aside .menu.el-menu {
   .el-menu-item,
   .el-submenu .el-submenu__title {
-    color: #b3b3b3;
+    color: $color-inactive;
     background-color: $bgc-not-root;
 
     &:hover {
-      color: #fff;
-      /*background-color: #25344b;*/
+      color: $color-hover;
     }
   }
 
@@ -269,7 +314,7 @@ $bgc-not-root: #1a2434;
   }
 
   .el-menu-item.is-active {
-    color: #fff;
+    color: $color-active;
     background-color: $g-color-primary;
   }
 }

@@ -12,7 +12,7 @@ export const navigation = [
     meta: new IRouteMeta({
       title: 'navigation.index',
       hideTitleInBrowserTab: true,
-      hideInBreadcrumb: true,
+      hideHomeBreadcrumb: true,
       icon: 'el-icon-s-home'
     })
   },

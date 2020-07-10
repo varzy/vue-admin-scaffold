@@ -6,7 +6,7 @@
 
     <github-corner
       url="https://github.com/varzy/vue-admin-scaffold"
-      :position="{ position: 'absolute', top: '-16px', right: '-16px' }"
+      :position="{ position: 'fixed', top: '56px', right: 0 }"
       :bg-color="PRIMARY_COLOR"
     ></github-corner>
   </div>
