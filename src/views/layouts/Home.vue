@@ -100,6 +100,14 @@ export default {
 
   methods: {
     handleMenuSelected({ key }) {
+      if (key === 'Custom') {
+        this.$notification.info({
+          message: 'You triggered a custom event~',
+          description: '不是每一场相遇都有结局，也不是每一个导航菜单都要跳转到一个页面。'
+        });
+        return;
+      }
+
       this.$router.push({ name: key });
     },
     onDropdownClick({ key }) {

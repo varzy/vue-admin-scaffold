@@ -45,6 +45,11 @@ export const navigation = [
         meta: new IRouteMeta({ title: 'Simple' })
       }
     ]
+  },
+  {
+    path: 'custom',
+    name: 'Custom',
+    meta: new IRouteMeta({ title: 'Custom', icon: 'number' })
   }
 ];
 
