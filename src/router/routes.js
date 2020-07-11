@@ -9,14 +9,19 @@ export const navigation = [
     alias: ['index', 'dashboard'],
     name: 'Index',
     component: _import('index/Index'),
-    meta: new IRouteMeta({ title: 'Dashboard', hideBreadcrumb: true, hideTitleInBrowserTab: true })
+    meta: new IRouteMeta({
+      title: 'Dashboard',
+      hideBreadcrumb: true,
+      hideTitleInBrowserTab: true,
+      icon: 'home'
+    })
   },
   {
     path: 'crud',
     name: 'Crud',
     component: Virtual,
     redirect: { name: 'CrudTable' },
-    meta: new IRouteMeta({ title: 'CRUD', disabledInBreadcrumb: true }),
+    meta: new IRouteMeta({ title: 'CRUD', disabledInBreadcrumb: true, icon: 'control' }),
     children: [
       {
         path: 'table',
@@ -31,7 +36,7 @@ export const navigation = [
     name: 'Chart',
     component: Virtual,
     redirect: { name: 'ChartSimple' },
-    meta: new IRouteMeta({ title: 'Chart', disabledInBreadcrumb: true }),
+    meta: new IRouteMeta({ title: 'Chart', disabledInBreadcrumb: true, icon: 'bar-chart' }),
     children: [
       {
         path: 'simple',
@@ -60,7 +65,8 @@ export default [
   {
     path: '/404',
     name: 'Error404',
-    component: _import('errors/404')
+    component: _import('errors/404'),
+    meta: { title: '404' }
   },
   { path: '*', redirect: { name: 'Error404' } }
 ];

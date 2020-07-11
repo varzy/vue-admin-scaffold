@@ -3,10 +3,22 @@
     <header class="home-header">
       <div class="left">
         <div class="logo">
-          <div class="logo-inner" @click="$router.push({ name: 'Index' })">Vue Admin Scaffold</div>
+          <div class="logo-inner" @click="$router.push({ name: 'Index' })">{{ projectName }}</div>
         </div>
       </div>
-      <div class="right">user</div>
+      <div class="right">
+        <a-dropdown @click.stop>
+          <div class="user right-item">
+            <span class="user-trigger">
+              <a-avatar class="user-trigger-avatar" icon="user" />
+              <span class="user-trigger-username">{{ $store.state.user.userInfo.name }}</span>
+            </span>
+          </div>
+          <a-menu slot="overlay" @click="onDropdownClick">
+            <a-menu-item key="logout"><a-icon type="logout" />Logout</a-menu-item>
+          </a-menu>
+        </a-dropdown>
+      </div>
     </header>
     <section class="home-body">
       <aside class="home-body-aside">
@@ -22,6 +34,7 @@
               v-for="route in $store.state.view.navigation"
               :key="route.name"
               :route="route"
+              @node-click="handleNavigationNodeClicked"
             ></navigation-item>
           </a-menu>
         </div>
@@ -59,6 +72,7 @@
 <script>
 import NavigationItem from '../widgets/NavigationItem';
 import PageFooter from '../widgets/Footer';
+import Permission from '../../utils/Permission';
 
 export default {
   name: 'Home',
@@ -67,21 +81,35 @@ export default {
 
   data() {
     return {
-      collapsed: false
+      collapsed: false,
+      projectName: process.env.VUE_APP_PROJECT_NAME
     };
   },
 
   computed: {
     calcBreadcrumb() {
-      console.log(this.$route.matched);
       return this.$route.matched.slice(1).filter(route => route.meta);
     }
   },
 
   methods: {
     handleMenuSelected({ key }) {
-      console.log(key);
       this.$router.push({ name: key });
+    },
+    onDropdownClick({ key }) {
+      const relation = {
+        logout: this.logout
+      };
+
+      if (relation[key]) relation[key]();
+    },
+    handleNavigationNodeClicked(route) {
+      console.log(route);
+    },
+    logout() {
+      Permission.logout();
+      this.$message.success('您已退出登录');
+      this.$router.push({ name: 'Login' });
     }
   }
 };
@@ -119,6 +147,35 @@ $bgc-page: #f9f9f9;
           font-family: 'Righteous', cursive;
           font-size: 20px;
           cursor: pointer;
+        }
+      }
+    }
+
+    .right {
+      &-item {
+        height: $height-header;
+        transition: background-color 0.2s ease-in-out;
+        display: flex;
+        align-items: center;
+        padding-left: 16px;
+        padding-right: 16px;
+
+        &:hover {
+          background-color: #f9f9f9;
+        }
+      }
+
+      .user {
+        &-trigger {
+          cursor: pointer;
+
+          &-avatar {
+            margin-right: 8px;
+          }
+
+          &-username {
+            vertical-align: middle;
+          }
         }
       }
     }

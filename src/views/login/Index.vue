@@ -19,7 +19,7 @@
 
       <a-row>
         <a-col :offset="3">
-          <a-button @click="onLogin">提交</a-button>
+          <a-button :loading="isSubmitting" @click="onLogin">提交</a-button>
         </a-col>
       </a-row>
     </div>
@@ -62,7 +62,8 @@ export default {
           password: this.form.password
         });
 
-        await this.$router.push({ name: 'Index' });
+        this.$message.success('登录成功');
+        this.$router.push({ name: 'Index' });
       } catch (e) {
         this.$message.error('登录失败');
       } finally {

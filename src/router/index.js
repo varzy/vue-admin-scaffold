@@ -1,7 +1,6 @@
 import Router from './router';
 import Store from '../store/';
 import { navigation } from './routes';
-import { cloneDeep as _cloneDeep } from 'lodash';
 import Permission from '@/utils/Permission';
 import { ls } from '@/utils/Storage';
 import NProgress from 'nprogress';
@@ -29,7 +28,7 @@ Router.beforeEach((to, from, next) => {
 
   // 保存导航路由至 vuex
   if (!Store.state.view.isNavigationSaved) {
-    Store.commit('view/STORE_NAVIGATION', _cloneDeep(navigation));
+    Store.commit('view/STORE_NAVIGATION', navigation);
   }
 
   // 更新是否显示面包屑导航栏

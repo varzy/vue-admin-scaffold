@@ -2,9 +2,13 @@
   <div class="index">
     <github-corner
       url="https://github.com/varzy/vue-admin-scaffold"
-      :position="{ position: 'absolute', top: '-24px', right: '-24px' }"
+      :position="{ position: 'absolute', top: '-24px', right: '-24px', zIndex: 500 }"
       :bg-color="PRIMARY_COLOR"
     ></github-corner>
+
+    <a-card title="Welcome">
+      hello, world
+    </a-card>
   </div>
 </template>
 
@@ -28,6 +32,5 @@ export default {
 <style scoped lang="scss">
 .index {
   position: relative;
-  height: 2000px;
 }
 </style>
