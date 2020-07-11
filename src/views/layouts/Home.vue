@@ -47,23 +47,29 @@
         </div>
       </aside>
       <main class="home-body-main">
-        <a-breadcrumb class="breadcrumb" v-show="$store.state.view.breadcrumbVisible">
-          <a-breadcrumb-item>
-            <router-link :to="{ name: 'Index' }">
-              <a-icon type="home" />
-            </router-link>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item v-for="item in calcBreadcrumb" :key="item.name">
-            <router-link v-if="!item.meta.disabledInBreadcrumb" :to="{ name: item.name }">
-              {{ item.meta.title }}
-            </router-link>
-            <span v-else>{{ item.meta.title }}</span>
-          </a-breadcrumb-item>
-        </a-breadcrumb>
+        <transition name="fade-effect" mode="out-in">
+          <a-breadcrumb class="breadcrumb" v-if="$store.state.view.breadcrumbVisible">
+            <a-breadcrumb-item>
+              <router-link :to="{ name: 'Index' }">
+                <a-icon type="home" />
+              </router-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item v-for="item in calcBreadcrumb" :key="item.name">
+              <router-link v-if="!item.meta.disabledInBreadcrumb" :to="{ name: item.name }">
+                {{ item.meta.title }}
+              </router-link>
+              <span v-else>{{ item.meta.title }}</span>
+            </a-breadcrumb-item>
+          </a-breadcrumb>
+        </transition>
 
-        <div class="content"><router-view /></div>
+        <div class="content">
+          <transition name="fade-transform" mode="out-in">
+            <router-view :key="$route.path" />
+          </transition>
+        </div>
 
-        <div class="footer"><page-footer></page-footer></div>
+        <page-footer class="footer"></page-footer>
       </main>
     </section>
   </div>
@@ -190,6 +196,7 @@ $bgc-page: #f9f9f9;
     &-aside {
       height: 100%;
       display: flex;
+      flex-shrink: 0;
       flex-direction: column;
       background-color: #fff;
       box-shadow: 2px 0 6px rgba(0, 21, 41, 0.08);
@@ -227,10 +234,11 @@ $bgc-page: #f9f9f9;
 
     &-main {
       flex: 1;
+      min-width: 0;
       min-height: 0;
       height: 100%;
       box-sizing: border-box;
-      overflow-y: auto;
+      overflow: hidden auto;
       padding: 24px;
 
       .breadcrumb {
@@ -243,5 +251,37 @@ $bgc-page: #f9f9f9;
       }
     }
   }
+}
+</style>
+
+<style lang="scss">
+/**
+ * 渐显渐隐
+ */
+.fade-effect-enter-active,
+.fade-effect-leave-active {
+  transition: opacity 0.4s ease-in-out;
+}
+.fade-effect-enter,
+.fade-effect-leave-to {
+  opacity: 0;
+}
+
+/**
+ * 页面切换
+ */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.4s ease-in-out;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>

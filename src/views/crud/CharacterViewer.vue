@@ -4,7 +4,7 @@
     v-model="isVisible"
     title="Character Profile"
     width="960px"
-    destroy-on-close
+    :after-close="onModalClosed"
   >
     <a-spin :spinning="isLoading">
       <div class="profile">
@@ -73,6 +73,11 @@ export default {
       } finally {
         this.isLoading = false;
       }
+    },
+    // 重置页面数据
+    onModalClosed() {
+      this.params.id = 0;
+      this.character = { ...this.$options.data().character };
     }
   }
 };
