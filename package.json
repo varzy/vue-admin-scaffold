@@ -4,11 +4,16 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern",
     "test:unit": "vue-cli-service test:unit",
+    "lint": "npm run lint:preset && npm run lint:additional",
+    "deploy": "bash deploy.sh",
+    "build:report": "vue-cli-service build --modern --report",
+    "docs:build": "vuepress build docs",
+    "docs:deploy": "bash ./docs/deploy.sh",
+    "docs:dev": "vuepress dev docs",
     "lint:additional": "prettier --write src/**/*.{css,scss,sass,json}",
-    "lint:preset": "vue-cli-service lint",
-    "lint": "npm run lint:preset && npm run lint:additional"
+    "lint:preset": "vue-cli-service lint"
   },
   "dependencies": {
     "ant-design-vue": "^1.6.3",

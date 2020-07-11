@@ -15,7 +15,7 @@ instance.interceptors.request.use(config => {
     : true;
   config.errorMsg = Object.prototype.hasOwnProperty.call(config, 'errorMsg')
     ? config.errorMsg
-    : `网络异常，请稍候重试`;
+    : `The network is abnormal, please try again later.`;
 
   return config;
 });
@@ -27,11 +27,11 @@ instance.interceptors.response.use(
 
     // http: 404
     if (+res.status === 404) {
-      AMessage.open({ content: '资源未找到', type: 'error' });
+      AMessage.open({ content: '404 Not Found.', type: 'error' });
     }
     // http: 504
     else if (+res.status === 504) {
-      AMessage.open({ content: '网络连接超时，请稍候重试', type: 'error' });
+      AMessage.open({ content: 'Connection Timeout.', type: 'error' });
     }
     // 其他异常时，如果接口允许显示异常，则显示预设的异常信息
     else if (res.config && res.config.showError) {

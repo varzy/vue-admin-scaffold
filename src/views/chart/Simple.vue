@@ -61,8 +61,8 @@ export default {
         xAxis: { type: 'category', boundaryGap: false },
         yAxis: { type: 'value' }
       })
-        .set('title.subtext', '展示了使用 ChartOptionsGenerator 链式操作生成 Echarts 配置的能力。')
-        .set('legend.data', ['销量', '进货'])
+        .set('title.text', 'Bar & Line')
+        .set('legend.data', ['Sale', 'Purchase'])
         .merge({
           tooltip: {
             axisPointer: {
@@ -76,10 +76,10 @@ export default {
         .set('xAxis.data', ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
         .set('series[0].type', 'line')
         .set('series[0].data', fakeData())
-        .set('series[0].name', '销量')
+        .set('series[0].name', 'Sale')
         .set('series[1].type', 'line')
         .set('series[1].data', fakeData())
-        .set('series[1].name', '进货')
+        .set('series[1].name', 'Purchase')
         .custom((options, _) => {
           _.set(options, 'series[1].label.show', true);
           _.set(options, 'series[0].areaStyle', {});
@@ -100,7 +100,7 @@ export default {
         }));
 
       this.pieChartOptions = new ChartOptionsGenerator()
-        .set('title.subtext', '展示了使用 ChartOptionsGenerator 一键生成饼图的能力。')
+        .set('title.text', 'Pie')
         .pieData(fakeData())
         .pieRose()
         .pieRing(['36%', '72%'])

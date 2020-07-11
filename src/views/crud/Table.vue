@@ -33,7 +33,7 @@
           <a-input v-model="form.name" placeholder="Please input Name"></a-input>
         </a-form-model-item>
         <a-form-model-item>
-          <a-button type="primary" :loading="isLoading" @click="onQuery">Submit</a-button>
+          <a-button type="primary" @click="onQuery">Submit</a-button>
           <a-button style="margin-left: 8px" @click="onReset">Reset</a-button>
         </a-form-model-item>
       </a-form-model>
@@ -60,7 +60,10 @@
           <a-tag v-if="text === 'unknown'">{{ text }}</a-tag>
         </template>
         <template #action="text, record">
-          <a-button size="small" type="primary" @click="onViewDetail(record)">Detail</a-button>
+          <a-button size="small" type="primary" @click="onViewProfile(record)">Profile</a-button>
+          <a-popconfirm title="Are you sure delete this character?" @confirm="onDelete(record)">
+            <a-button ghost size="small" type="danger" style="margin-left: 4px">Delete </a-button>
+          </a-popconfirm>
         </template>
       </a-table>
     </a-card>
@@ -72,6 +75,7 @@
 <script>
 import { reqFetchCharacters } from '../../api/mock';
 import CharacterViewer from './CharacterViewer';
+import { asyncTimeout } from '@/utils/helpers';
 
 export default {
   name: 'Table',
@@ -154,8 +158,24 @@ export default {
       });
       this.getTableData(1);
     },
-    onViewDetail(record) {
+    onViewProfile(record) {
       this.$refs.refCharacterViewer.open({ id: record.id });
+    },
+    async onDelete() {
+      try {
+        this.isLoading = true;
+
+        await asyncTimeout(500);
+        this.$message.success('Fake Success~');
+
+        const page =
+          this.tableData.length === 1 && this.pagination.current > 1
+            ? this.pagination.current - 1
+            : this.pagination.current;
+        this.getTableData(page);
+      } finally {
+        this.isLoading = false;
+      }
     }
   }
 };
