@@ -26,11 +26,13 @@ Router.beforeEach((to, from, next) => {
     if (to.name !== 'Login') next({ name: 'Login' });
   }
 
+  /**
+   * 视图
+   */
   // 保存导航路由至 vuex
   if (!Store.state.view.isNavigationSaved) {
     Store.commit('view/STORE_NAVIGATION', navigation);
   }
-
   // 更新是否显示面包屑导航栏
   Store.commit('view/UPDATE_BREADCRUMB_VISIBLE', to.meta && !to.meta.hideBreadcrumb);
 
