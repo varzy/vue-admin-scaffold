@@ -1,0 +1,13 @@
+@import "variables";
+
+html {
+  body {
+    font-family: sans-serif;
+    color: $g-color-text;
+  }
+
+  a,
+  button {
+    outline: none;
+  }
+}

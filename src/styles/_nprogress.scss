@@ -1,0 +1,7 @@
+@import "variables";
+@import "~nprogress/nprogress.css";
+
+#nprogress .bar {
+  z-index: 99999;
+  background: $g-color-primary;
+}
