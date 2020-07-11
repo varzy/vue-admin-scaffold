@@ -1,88 +1,47 @@
 <template>
   <div class="login">
     <div class="wrapper">
-      <h1 class="header">{{ projectName }}</h1>
-
-      <el-form
-        class="form"
-        size="large"
+      <a-form-model
+        :label-col="{ span: 3 }"
+        :wrapper-col="{ span: 20 }"
         ref="form"
         :model="form"
         :rules="formRules"
         :disabled="isSubmitting"
       >
-        <el-form-item prop="username">
-          <el-input
-            :placeholder="`${$t('username')}: admin`"
-            prefix-icon="el-icon-user"
-            v-model="form.username"
-            @keydown.enter.native="onLogin"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input
-            type="password"
-            :placeholder="`${$t('password')}: 123456`"
-            prefix-icon="el-icon-lock"
-            v-model="form.password"
-            @keydown.enter.native="onLogin"
-          ></el-input>
-        </el-form-item>
-      </el-form>
+        <a-form-model-item label="用户名" prop="username">
+          <a-input placeholder="请输入用户名" v-model="form.username"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="密码" prop="password">
+          <a-input type="password" placeholder="请输入密码" v-model="form.password"></a-input>
+        </a-form-model-item>
+      </a-form-model>
 
-      <el-button
-        v-size:w="'100%'"
-        size="large"
-        type="primary"
-        :loading="isSubmitting"
-        @click="onLogin"
-      >
-        {{ $t('login') }}
-      </el-button>
+      <a-row>
+        <a-col :offset="3">
+          <a-button @click="onLogin">提交</a-button>
+        </a-col>
+      </a-row>
     </div>
-
-    <div class="language_selector">
-      <language-selector></language-selector>
-    </div>
-
-    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
-import Permission from '../../utils/Permission';
-import PageFooter from '../widgets/Footer';
-import LanguageSelector from '../widgets/LanguageSelector';
+import Permission from '@/utils/Permission';
 
 export default {
   name: 'Login',
 
-  components: { PageFooter, LanguageSelector },
-
   data() {
     return {
       isSubmitting: false,
-      projectName: process.env.VUE_APP_PROJECT_NAME,
       form: {
-        username: 'admin',
+        username: '',
         password: ''
       },
       formRules: {
-        username: [
-          {
-            required: true,
-            // @TODO: 切换语言时无法自动切换表单验证提示信息，需要优化
-            message: this.$i18n.t('validator.required', { field: this.$i18n.t('username') }),
-            trigger: 'blur'
-          }
-        ],
-        password: [
-          {
-            required: true,
-            message: this.$i18n.t('validator.required', { field: this.$i18n.t('password') }),
-            trigger: 'blur'
-          }
-        ]
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       }
     };
   },
@@ -105,7 +64,7 @@ export default {
 
         await this.$router.push({ name: 'Index' });
       } catch (e) {
-        this.$message.error(this.$i18n.t('view.login.login_fail'));
+        this.$message.error('登录失败');
       } finally {
         this.isSubmitting = false;
       }
@@ -116,41 +75,17 @@ export default {
 
 <style scoped lang="scss">
 .login {
-  position: relative;
   height: 100vh;
+  background-color: #c7c7c7;
   display: flex;
-  flex-direction: column;
-  background-color: #f0f2f5;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
 
   .wrapper {
-    margin: 200px auto;
-    background-color: #fff;
-    padding: 30px;
-    width: 480px;
     border-radius: 8px;
-
-    .header {
-      font-size: 24px;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      font-weight: normal;
-    }
-
-    .form {
-      margin-top: 40px;
-    }
-  }
-
-  .footer {
-    margin-bottom: 32px;
-  }
-
-  .language_selector {
-    position: fixed;
-    right: 32px;
-    top: 32px;
+    width: 560px;
+    padding: 24px 36px;
+    background-color: #fff;
   }
 }
 </style>

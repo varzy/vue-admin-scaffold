@@ -1,186 +1,110 @@
 <template>
-  <section class="layouts_home">
-    <header class="layouts_home-header">
+  <div class="home">
+    <header class="home-header">
       <div class="left">
         <div class="logo">
-          <span class="logo-inner" @click="$router.push({ name: 'Index' })">{{ projectName }}</span>
+          <div class="logo-inner" @click="$router.push({ name: 'Index' })">Vue Admin Scaffold</div>
         </div>
       </div>
-
-      <div class="right">
-        <el-image class="avatar" :src="userAvatar"></el-image>
-        <div class="user">
-          <el-dropdown size="medium" :show-timeout="0" @command="handleDropdownCommanded">
-            <span class="user-label">{{ $store.state.user.userInfo.name }}</span>
-            <i class="el-icon-arrow-down el-icon--right"></i>
-
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="logout">{{ $t('logout') }}</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-        <div class="locale">
-          <language-selector label-color="#fff"></language-selector>
-        </div>
-      </div>
+      <div class="right">user</div>
     </header>
-
-    <section class="layouts_home-body">
-      <aside class="layouts_home-body-aside">
-        <el-menu class="menu" :default-active="$route.name" :collapse="isAsideCollapsed">
-          <navigation-item
-            v-for="navigation in $store.state.view.navigation"
-            :key="navigation.name"
-            :route="navigation"
-            @node-click="handleMenuItemClick"
+    <section class="home-body">
+      <aside class="home-body-aside">
+        <div class="menu" :style="{ width: collapsed ? '80px' : '256px' }">
+          <a-menu
+            :inline-collapsed="collapsed"
+            class="menu-nav"
+            :mode="collapsed ? 'vertical' : 'inline'"
+            :selected-keys="[$route.name]"
+            @click="handleMenuSelected"
           >
-          </navigation-item>
-        </el-menu>
-
-        <div class="collapse">
-          <i
-            :class="[
-              'el-icon-s-fold',
-              'collapse-icon',
-              { 'collapse-icon-collapsed': isAsideCollapsed }
-            ]"
-            @click="isAsideCollapsed = !isAsideCollapsed"
-          ></i>
+            <navigation-item
+              v-for="route in $store.state.view.navigation"
+              :key="route.name"
+              :route="route"
+            ></navigation-item>
+          </a-menu>
+        </div>
+        <div class="fold">
+          <a-icon
+            :class="['fold-icon', { 'fold-icon-collapsed': collapsed }]"
+            type="menu-fold"
+            @click="collapsed = !collapsed"
+          />
         </div>
       </aside>
-
-      <main class="layouts_home-body-main">
-        <el-breadcrumb class="breadcrumb" v-show="$store.state.view.homeBreadcrumbVisible">
-          <el-breadcrumb-item :to="{ name: 'Index' }">
-            {{ $t('navigation.index') }}
-          </el-breadcrumb-item>
-          <el-breadcrumb-item v-for="(breadcrumb, index) in calcBreadcrumb" :key="index">
-            <router-link v-if="breadcrumb.enabled" :to="breadcrumb.route">
-              {{ calcBreadcrumbTitle(breadcrumb.title) }}
+      <main class="home-body-main">
+        <a-breadcrumb class="breadcrumb" v-show="$store.state.view.breadcrumbVisible">
+          <a-breadcrumb-item>
+            <router-link :to="{ name: 'Index' }">
+              <a-icon type="home" />
             </router-link>
-            <span v-else>{{ calcBreadcrumbTitle(breadcrumb.title) }}</span>
-          </el-breadcrumb-item>
-        </el-breadcrumb>
+          </a-breadcrumb-item>
+          <a-breadcrumb-item v-for="item in calcBreadcrumb" :key="item.name">
+            <router-link v-if="!item.meta.disabledInBreadcrumb" :to="{ name: item.name }">
+              {{ item.meta.title }}
+            </router-link>
+            <span v-else>{{ item.meta.title }}</span>
+          </a-breadcrumb-item>
+        </a-breadcrumb>
 
-        <div class="container">
-          <transition name="fade" mode="out-in">
-            <router-view />
-          </transition>
-        </div>
+        <div class="content"><router-view /></div>
 
-        <page-footer class="footer"></page-footer>
+        <div class="footer"><page-footer></page-footer></div>
       </main>
     </section>
-  </section>
+  </div>
 </template>
 
 <script>
 import NavigationItem from '../widgets/NavigationItem';
-import LanguageSelector from '../widgets/LanguageSelector';
 import PageFooter from '../widgets/Footer';
-import { PRIMARY_COLOR } from '../../config/constants';
-import Permission from '../../utils/Permission';
-import IBreadcrumbItem from '../../models/IBreadcrumbItem';
 
 export default {
-  name: 'LayoutHome',
+  name: 'Home',
 
-  components: { NavigationItem, LanguageSelector, PageFooter },
+  components: { NavigationItem, PageFooter },
 
   data() {
     return {
-      menuActiveColor: PRIMARY_COLOR,
-      projectName: process.env.VUE_APP_PROJECT_NAME,
-      userAvatar: require('@/assets/images/default_avatar.png'),
-      isAsideCollapsed: false
+      collapsed: false
     };
   },
 
   computed: {
     calcBreadcrumb() {
-      if (this.$store.state.view.useCustomBreadcrumb) {
-        return this.$store.state.view.customBreadcrumb;
-      }
-
-      return this.$route.matched
-        .filter(route => route.meta && !route.meta.hideInBreadcrumb)
-        .map(
-          route =>
-            new IBreadcrumbItem({
-              route,
-              title: route.meta && route.meta.title ? route.meta.title : 'unnamed',
-              enabled: route.meta && !route.meta.disabledInBreadcrumb
-            })
-        );
+      console.log(this.$route.matched);
+      return this.$route.matched.slice(1).filter(route => route.meta);
     }
   },
 
   methods: {
-    calcBreadcrumbTitle(title) {
-      return this.$i18n.te(title) ? this.$i18n.t(title) : title;
-    },
-    handleMenuItemClick(route) {
-      const routeAction = route.meta.action;
-
-      if (!routeAction) {
-        this.$router.push({ name: route.name });
-        return;
-      }
-
-      const relations = {
-        SayHi: this.sayHi
-      };
-
-      const willDo = relations[routeAction];
-      if (willDo) {
-        willDo();
-      } else {
-        this.$message.error(this.$i18n.t('view.layout.home.unknown_action'));
-      }
-    },
-    handleDropdownCommanded(command) {
-      const relation = {
-        logout: () => this.logout()
-      };
-
-      if (relation[command]) relation[command]();
-    },
-    logout() {
-      Permission.logout();
-
-      this.$message.success(this.$i18n.t('view.layout.home.logout'));
-      this.$router.push({ name: 'Login' });
-    },
-    sayHi() {
-      this.$notify({
-        title: 'hello, world',
-        message: this.$i18n.t('view.layout.home.you_triggered_an_action')
-      });
+    handleMenuSelected({ key }) {
+      console.log(key);
+      this.$router.push({ name: key });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Gotu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
-$bgc-aside: #283646;
-$bgc-header: #fff;
 $height-header: 56px;
-$width-aside: 232px;
+$bgc-header: #fff;
+$bgc-page: #f9f9f9;
 
-.layouts_home {
-  position: relative;
+.home {
   height: 100vh;
-  background-color: $g-color-background;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: $bgc-page;
 
   &-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
+    flex-shrink: 0;
     height: $height-header;
-    z-index: 500;
+    z-index: 501;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -190,76 +114,52 @@ $width-aside: 232px;
     box-shadow: 0 2px 6px rgba(0, 21, 41, 0.08);
 
     .left {
-      display: flex;
-      align-items: center;
-
       .logo {
         &-inner {
+          font-family: 'Righteous', cursive;
+          font-size: 20px;
           cursor: pointer;
         }
-      }
-    }
-
-    .right {
-      display: flex;
-      align-items: center;
-
-      .avatar {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: 1px solid #ddd;
-      }
-
-      .user {
-        margin-left: 16px;
-        cursor: pointer;
-      }
-
-      .locale {
-        margin-left: 16px;
-        cursor: pointer;
       }
     }
   }
 
   &-body {
-    box-sizing: border-box;
-    padding-top: $height-header;
+    flex: 1;
+    min-height: 0;
     height: 100%;
     display: flex;
 
     &-aside {
       height: 100%;
-      flex-shrink: 0;
       display: flex;
       flex-direction: column;
+      background-color: #fff;
       box-shadow: 2px 0 6px rgba(0, 21, 41, 0.08);
 
       .menu {
         flex: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-        border-right: 0;
+        overflow: hidden auto;
+        transition: all 0.2s ease-in-out;
 
-        &:not(.el-menu--collapse) {
-          width: $width-aside;
+        &-nav {
+          width: 100%;
+          border-right: 0;
         }
       }
 
-      .collapse {
+      .fold {
         border-top: 1px solid #f0f0f0;
         height: 40px;
         display: flex;
         align-items: center;
         background-color: #fff;
-        padding-left: 20px;
+        padding-left: 32px;
 
         &-icon {
-          font-size: 20px;
-          color: #909399;
-          transition: all 0.2s ease-in-out;
+          font-size: 16px;
           transform: rotate(0deg);
+          transition: all 0.2s ease-in-out;
 
           &-collapsed {
             transform: rotate(180deg);
@@ -269,67 +169,22 @@ $width-aside: 232px;
     }
 
     &-main {
-      box-sizing: border-box;
-      height: 100%;
       flex: 1;
+      min-height: 0;
+      height: 100%;
+      box-sizing: border-box;
       overflow-y: auto;
-      padding: 16px;
+      padding: 24px;
 
       .breadcrumb {
-        margin-bottom: 16px;
+        margin-bottom: 24px;
       }
 
       .footer {
-        margin-top: 64px;
+        margin-top: 36px;
+        margin-bottom: 24px;
       }
     }
   }
-}
-</style>
-
-<style lang="scss">
-/**
- * 侧边导航菜单
- */
-$bgc-aside: #fff;
-$bgc-not-root: #f9f9f9;
-$color-inactive: #333;
-$color-hover: $g-color-primary;
-$color-active: #fff;
-
-.layouts_home-body-aside .menu.el-menu {
-  .el-menu-item,
-  .el-submenu .el-submenu__title {
-    color: $color-inactive;
-    background-color: $bgc-not-root;
-
-    &:hover {
-      color: $color-hover;
-    }
-  }
-
-  > .el-menu-item,
-  > .el-submenu > .el-submenu__title {
-    background-color: $bgc-aside;
-  }
-
-  .el-menu-item.is-active {
-    color: $color-active;
-    background-color: $g-color-primary;
-  }
-}
-</style>
-
-<style lang="scss">
-/**
- * 过渡动画
- */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity $g-time-animation;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

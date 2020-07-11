@@ -1,22 +1,15 @@
 import Router from './router';
-import NProgress from 'nprogress';
 import Store from '../store/';
-import { navigation } from '@/router/routes';
+import { navigation } from './routes';
 import { cloneDeep as _cloneDeep } from 'lodash';
 import Permission from '@/utils/Permission';
 import { ls } from '@/utils/Storage';
-import { PRIMARY_LOCALE } from '@/config/constants';
-// import { loadLanguage } from '@/i18n';
+import NProgress from 'nprogress';
 
 NProgress.configure({ showSpinner: false });
 
-Router.beforeEach(async (to, from, next) => {
-  /**
-   * NProgress
-   */
-  if (to.meta && !to.meta.hideProgress) {
-    NProgress.start();
-  }
+Router.beforeEach((to, from, next) => {
+  NProgress.start();
 
   /**
    * 权限
@@ -24,42 +17,23 @@ Router.beforeEach(async (to, from, next) => {
   // 已登录
   if (Permission.isLogin()) {
     // 不允许已登录状态下再次进入登录页
-    if (to.name === 'Login') {
-      next({ name: 'Index' });
-    }
-
+    if (to.name === 'Login') next({ name: 'Index' });
     // 保存用户信息至 vuex
-    if (!Store.state.user.userInfo.id) {
-      Store.commit('user/STORE_USER_INFO', ls.get('user'));
-    }
+    if (!Store.state.user.userInfo.id) Store.commit('user/STORE_USER_INFO', ls.get('user'));
   }
   // 未登录
   else {
     // 强制重定向到登录页
-    if (to.name !== 'Login') {
-      next({ name: 'Login' });
-    }
+    if (to.name !== 'Login') next({ name: 'Login' });
   }
 
-  /**
-   * 视图
-   */
-  // 保存导航栏至 vuex
+  // 保存导航路由至 vuex
   if (!Store.state.view.isNavigationSaved) {
     Store.commit('view/STORE_NAVIGATION', _cloneDeep(navigation));
   }
 
-  Store.commit('view/UNSET_CUSTOM_BREADCRUMB');
-  Store.commit('view/UPDATE_HOME_BREADCRUMB_VISIBLE', to.meta && !to.meta.hideHomeBreadcrumb);
-
-  /**
-   * i18n
-   */
-  if (!ls.get('lang')) {
-    ls.set('lang', PRIMARY_LOCALE);
-  }
-  Store.commit('lang/CHOOSE_LANGUAGE', ls.get('lang'));
-  // await loadLanguage(ls.get('lang'));
+  // 更新是否显示面包屑导航栏
+  Store.commit('view/UPDATE_BREADCRUMB_VISIBLE', to.meta && !to.meta.hideBreadcrumb);
 
   /**
    * 浏览器标签页标题

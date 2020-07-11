@@ -1,10 +1,8 @@
-import IUserInfo from '@/models/IUserInfo';
-
 export default {
   namespaced: true,
 
   state: {
-    userInfo: new IUserInfo({ id: 0, username: '', name: '' })
+    userInfo: { id: 0, username: '', name: '' }
   },
 
   mutations: {

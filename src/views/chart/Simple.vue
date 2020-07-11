@@ -1,22 +1,22 @@
 <template>
   <div class="chart">
-    <el-row :gutter="24">
-      <el-col :span="12">
-        <el-card shadow="hover" header="折线图">
+    <a-row :gutter="24">
+      <a-col :span="12">
+        <a-card shadow="hover" header="折线图">
           <v-chart
             autoresize
             v-size:w="'100%'"
             v-size:h="400"
             :options="lineChartOptions"
           ></v-chart>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card shadow="hover" header="饼图">
+        </a-card>
+      </a-col>
+      <a-col :span="12">
+        <a-card shadow="hover" header="饼图">
           <v-chart autoresize v-size:w="'100%'" v-size:h="400" :options="pieChartOptions"></v-chart>
-        </el-card>
-      </el-col>
-    </el-row>
+        </a-card>
+      </a-col>
+    </a-row>
   </div>
 </template>
 

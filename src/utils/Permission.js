@@ -1,5 +1,4 @@
 import { ls } from '@/utils/Storage';
-import IUserInfo from '@/models/IUserInfo';
 import { reqLogin } from '@/api/mock';
 
 export default class Permission {
@@ -14,14 +13,11 @@ export default class Permission {
       throw new Error('login_fail');
     }
 
-    ls.set(
-      'user',
-      new IUserInfo({
-        id: 1,
-        username: 'username',
-        name: 'Nickname'
-      })
-    );
+    ls.set('user', {
+      id: 1,
+      username: 'username',
+      name: 'Nickname'
+    });
   }
 
   static logout() {

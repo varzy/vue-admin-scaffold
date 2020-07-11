@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import { Message as ElMessage } from 'element-ui';
 
 const instance = Axios.create({
   baseURL: process.env.VUE_APP_BASE_URL_API,
@@ -23,20 +22,20 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(
   res => res,
   err => {
-    const res = err.response;
-
-    // http: 404
-    if (+res.status === 404) {
-      ElMessage({ message: '资源未找到', type: 'error' });
-    }
-    // http: 504
-    else if (+res.status === 504) {
-      ElMessage({ message: '网络连接超时，请稍候重试', type: 'error' });
-    }
-    // 其他异常时，如果接口允许显示异常，则显示预设的异常信息
-    else if (res.config && res.config.showError) {
-      ElMessage({ message: res.config.errorMsg, type: 'error' });
-    }
+    // const res = err.response;
+    //
+    // // http: 404
+    // if (+res.status === 404) {
+    //   ElMessage({ message: '资源未找到', type: 'error' });
+    // }
+    // // http: 504
+    // else if (+res.status === 504) {
+    //   ElMessage({ message: '网络连接超时，请稍候重试', type: 'error' });
+    // }
+    // // 其他异常时，如果接口允许显示异常，则显示预设的异常信息
+    // else if (res.config && res.config.showError) {
+    //   ElMessage({ message: res.config.errorMsg, type: 'error' });
+    // }
 
     return Promise.reject(err.response);
   }

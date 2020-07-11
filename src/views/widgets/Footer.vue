@@ -1,9 +1,9 @@
 <template>
   <footer class="footer">
     <span class="copyright">&copy; {{ new Date().getFullYear() }}</span>
-    <el-divider direction="vertical"></el-divider>
+    <a-divider type="vertical"></a-divider>
     <a class="link" href="https://github.com/varzy/vue-admin-scaffold" target="_blank">Github </a>
-    <el-divider direction="vertical"></el-divider>
+    <a-divider type="vertical"></a-divider>
     <a class="link" href="https://varzy.me" target="_blank">Aiden Zhao</a>
   </footer>
 </template>
