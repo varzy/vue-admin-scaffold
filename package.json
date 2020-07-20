@@ -20,7 +20,7 @@
     "core-js": "^3.6.4",
     "echarts": "^4.7.0",
     "element-ui": "^2.13.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "marked": "^0.8.2",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
