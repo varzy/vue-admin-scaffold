@@ -1,5 +1,5 @@
 <template>
-  <div class="crud_table">
+  <div class="character">
     <a-alert message="Rick And Morty Characters~" type="info">
       <template #description>
         Thanks for Rick and Morty API! You can visit
@@ -79,7 +79,7 @@ import CharacterViewer from './CharacterViewer';
 import { asyncTimeout } from '@/utils/helpers';
 
 export default {
-  name: 'Table',
+  name: 'Character',
 
   components: { CharacterViewer },
 
@@ -154,9 +154,7 @@ export default {
       this.getTableData(1);
     },
     onReset() {
-      Object.keys(this.form).forEach(key => {
-        this.form[key] = undefined;
-      });
+      this.form = { ...this.$options.data().form };
       this.getTableData(1);
     },
     onViewProfile(record) {
@@ -181,5 +179,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

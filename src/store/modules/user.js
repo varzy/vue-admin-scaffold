@@ -1,8 +1,16 @@
+import { UserInfo } from '@/utils/Permission';
+
 export default {
   namespaced: true,
 
   state: {
-    userInfo: { id: 0, username: '', name: '', avatar: '' }
+    userInfo: new UserInfo({
+      id: 0,
+      username: '',
+      name: '',
+      avatar: '',
+      roles: []
+    })
   },
 
   mutations: {

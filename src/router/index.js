@@ -10,19 +10,17 @@ NProgress.configure({ showSpinner: false });
 /**
  * 过滤路由数组得到适用于导航栏的路由
  */
-// const filterNavRoutes = routes => {
-//   const availableRoutes = [];
-//   routes.forEach(route => {
-//     if (route.meta && route.meta.inNav) {
-//       if (route.children) {
-//         route.children = filterNavRoutes(route.children);
-//       }
-//       availableRoutes.push(route);
-//     }
-//   });
+const filterNavRoutes = routes => {
+  const availableRoutes = [];
+  routes.forEach(route => {
+    if (route.meta && route.meta.inNav) {
+      if (route.children) route.children = filterNavRoutes(route.children);
+      availableRoutes.push(route);
+    }
+  });
 
-//   return availableRoutes;
-// };
+  return availableRoutes;
+};
 
 Router.beforeEach((to, from, next) => {
   NProgress.start();
@@ -48,7 +46,7 @@ Router.beforeEach((to, from, next) => {
    */
   // 保存导航路由至 vuex
   if (!Store.state.view.isNavigationSaved) {
-    Store.commit('view/STORE_NAVIGATION', navigation);
+    Store.commit('view/STORE_NAVIGATION', filterNavRoutes(navigation));
   }
   // 更新是否显示面包屑导航栏
   Store.commit('view/UPDATE_BREADCRUMB_VISIBLE', to.meta && !to.meta.hideBreadcrumb);

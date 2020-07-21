@@ -3,17 +3,28 @@ import Home from '@/views/layouts/Home';
 import Virtual from '@/views/layouts/Virtual';
 
 export class Meta {
-  constructor({ title, hideBreadcrumb = false, roles = null }) {
+  constructor({ title, disabledInBreadcrumb = false, hideBreadcrumb = false, roles = null }) {
     this.title = title;
+    this.disabledInBreadcrumb = disabledInBreadcrumb;
     this.hideBreadcrumb = hideBreadcrumb;
     this.roles = roles;
   }
 }
 
 export class NavigationMeta extends Meta {
-  constructor({ title, hideBreadcrumb = false, roles = null, icon = '' }) {
-    super({ title, hideBreadcrumb, roles });
+  constructor({
+    title,
+    disabledInBreadcrumb = false,
+    hideBreadcrumb = false,
+    roles = null,
+    icon = '',
+    activeMenu = null,
+    inNav = true
+  }) {
+    super({ title, disabledInBreadcrumb, hideBreadcrumb, roles });
     this.icon = icon;
+    this.activeMenu = activeMenu;
+    this.inNav = inNav;
   }
 }
 
@@ -33,14 +44,41 @@ export const navigation = [
     path: 'crud',
     name: 'Crud',
     component: Virtual,
-    redirect: { name: 'CrudTable' },
+    redirect: { name: 'CrudCharacter' },
     meta: new NavigationMeta({ title: 'CRUD', disabledInBreadcrumb: true, icon: 'control' }),
     children: [
       {
-        path: 'table',
-        name: 'CrudTable',
-        component: _import('crud/Table'),
-        meta: new NavigationMeta({ title: 'Table' })
+        path: 'character',
+        name: 'CrudCharacter',
+        component: _import('crud/Character'),
+        meta: new NavigationMeta({ title: 'Character' })
+      },
+      {
+        path: 'article',
+        name: 'CrudArticle',
+        component: Virtual,
+        redirect: { name: 'CrudArticleList' },
+        meta: new NavigationMeta({ title: 'Article', disabledInBreadcrumb: true }),
+        children: [
+          {
+            path: 'list',
+            name: 'CrudArticleList',
+            component: _import('crud/article/List'),
+            meta: new NavigationMeta({ title: 'Article List' })
+          },
+          {
+            path: 'create',
+            name: 'CrudArticleCreate',
+            component: _import('crud/article/Create'),
+            meta: new NavigationMeta({ title: 'Create Article' })
+          },
+          {
+            path: 'edit',
+            name: 'CrudArticleEdit',
+            component: _import('crud/article/Edit'),
+            meta: new NavigationMeta({ title: 'Edit Article', inNav: false })
+          }
+        ]
       }
     ]
   },
@@ -73,19 +111,19 @@ export const navigation = [
         path: 'user',
         name: 'PermissionUser',
         component: _import('permission/User'),
-        meta: new NavigationMeta({ title: 'User' })
+        meta: new NavigationMeta({ title: 'User', roles: ['Super'] })
       },
       {
         path: 'category',
         name: 'PermissionCategory',
         component: _import('permission/Category'),
-        meta: new NavigationMeta({ title: 'Category' })
+        meta: new NavigationMeta({ title: 'Category', roles: ['Super', 'Manager'] })
       },
       {
         path: 'post',
         name: 'PermissionPost',
         component: _import('permission/Post'),
-        meta: new NavigationMeta({ title: 'Post' })
+        meta: new NavigationMeta({ title: 'Post', roles: ['Super', 'Manager'] })
       }
     ]
   },
@@ -115,6 +153,18 @@ export default [
         name: 'Profile',
         component: _import('profile/Index'),
         meta: { title: 'Profile' }
+      },
+      {
+        path: '/404',
+        name: 'Error404',
+        component: _import('errors/404'),
+        meta: { title: '404' }
+      },
+      {
+        path: '/401',
+        name: 'Error401',
+        component: _import('errors/401'),
+        meta: { title: '401' }
       }
     ]
   },
@@ -123,12 +173,6 @@ export default [
     name: 'Login',
     component: _import('login/Index'),
     meta: { title: 'Login' }
-  },
-  {
-    path: '/404',
-    name: 'Error404',
-    component: _import('errors/404'),
-    meta: { title: '404' }
   },
   { path: '*', redirect: { name: 'Error404' } }
 ];
