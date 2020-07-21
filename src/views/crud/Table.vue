@@ -34,7 +34,7 @@
         </a-form-model-item>
         <a-form-model-item>
           <a-button type="primary" @click="onQuery">Submit</a-button>
-          <a-button style="margin-left: 8px" @click="onReset">Reset</a-button>
+          <a-button v-gap:ml="8" @click="onReset">Reset</a-button>
         </a-form-model-item>
       </a-form-model>
 
@@ -62,7 +62,7 @@
         <template #action="text, record">
           <a-button size="small" type="primary" @click="onViewProfile(record)">Profile</a-button>
           <a-popconfirm title="Are you sure delete this character?" @confirm="onDelete(record)">
-            <a-button ghost size="small" type="danger" style="margin-left: 4px">Delete </a-button>
+            <a-button ghost size="small" type="danger" v-gap:ml="4">Delete </a-button>
           </a-popconfirm>
         </template>
       </a-table>
@@ -181,7 +181,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.crud_table {
-}
-</style>
+<style lang="scss" scoped></style>

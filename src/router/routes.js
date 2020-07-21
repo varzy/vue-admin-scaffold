@@ -47,9 +47,41 @@ export const navigation = [
     ]
   },
   {
+    path: 'permission',
+    name: 'Permission',
+    component: Virtual,
+    meta: new IRouteMeta({ title: 'Permission', disabledInBreadcrumb: true, icon: 'file-protect' }),
+    children: [
+      {
+        path: 'user',
+        name: 'PermissionUser',
+        component: _import('permission/User'),
+        meta: new IRouteMeta({ title: 'User' })
+      },
+      {
+        path: 'category',
+        name: 'PermissionCategory',
+        component: _import('permission/Category'),
+        meta: new IRouteMeta({ title: 'Category' })
+      },
+      {
+        path: 'post',
+        name: 'PermissionPost',
+        component: _import('permission/Post'),
+        meta: new IRouteMeta({ title: 'Post' })
+      }
+    ]
+  },
+  {
     path: 'custom',
     name: 'Custom',
     meta: new IRouteMeta({ title: 'Custom', icon: 'number' })
+  },
+  {
+    path: 'setting',
+    name: 'Setting',
+    component: _import('setting/Index'),
+    meta: new IRouteMeta({ title: 'Settings', icon: 'setting' })
   }
 ];
 
@@ -59,13 +91,21 @@ export default [
     name: 'Home',
     component: Home,
     redirect: { name: 'Index' },
-    children: [...navigation]
+    children: [
+      ...navigation,
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: _import('profile/Index'),
+        meta: { title: 'Profile' }
+      }
+    ]
   },
   {
     path: '/login',
     name: 'Login',
     component: _import('login/Index'),
-    meta: { title: '登录' }
+    meta: { title: 'Login' }
   },
   {
     path: '/404',

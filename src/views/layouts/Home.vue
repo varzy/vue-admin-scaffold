@@ -15,6 +15,7 @@
             </span>
           </div>
           <a-menu slot="overlay" @click="onDropdownClick">
+            <a-menu-item key="profile"><a-icon type="user" />Profile</a-menu-item>
             <a-menu-item key="logout"><a-icon type="logout" />Logout</a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -112,13 +113,17 @@ export default {
     },
     onDropdownClick({ key }) {
       const relation = {
-        logout: this.logout
+        logout: this.logout,
+        profile: this.viewProfile
       };
 
       if (relation[key]) relation[key]();
     },
     handleNavigationNodeClicked(route) {
       console.log(route);
+    },
+    viewProfile() {
+      this.$router.push({ name: 'Profile' });
     },
     logout() {
       Permission.logout();

@@ -7,6 +7,23 @@ import NProgress from 'nprogress';
 
 NProgress.configure({ showSpinner: false });
 
+/**
+ * 过滤路由数组得到适用于导航栏的路由
+ */
+// const filterNavRoutes = routes => {
+//   const availableRoutes = [];
+//   routes.forEach(route => {
+//     if (route.meta && route.meta.inNav) {
+//       if (route.children) {
+//         route.children = filterNavRoutes(route.children);
+//       }
+//       availableRoutes.push(route);
+//     }
+//   });
+
+//   return availableRoutes;
+// };
+
 Router.beforeEach((to, from, next) => {
   NProgress.start();
 

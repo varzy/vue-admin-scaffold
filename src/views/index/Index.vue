@@ -6,9 +6,7 @@
       :bg-color="PRIMARY_COLOR"
     ></github-corner>
 
-    <a-card title="Welcome">
-      hello, world
-    </a-card>
+    <a-card title="Welcome">hello, world</a-card>
   </div>
 </template>
 

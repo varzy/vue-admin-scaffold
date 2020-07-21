@@ -1,3 +1,6 @@
+/**
+ * v-size:w="12"
+ */
 export default function(el, { value, arg }) {
   if (!['width', 'height', 'w', 'h'].includes(arg)) {
     if (process.env.NODE_ENV === 'development') {

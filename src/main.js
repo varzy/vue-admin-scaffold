@@ -5,6 +5,7 @@ import store from './store/';
 import Antd from './plugins/antd/';
 import GlobalComponents from './plugins/global-components/';
 import GlobalDirectives from './plugins/global-directives/';
+import './mock/';
 
 import './styles/main.scss';
 
