@@ -1,4 +1,4 @@
-import { ls } from '@/utils/Storage';
+import { ls } from '@/utils/storage';
 import { reqLogin } from '@/api/auth';
 
 export default class Permission {

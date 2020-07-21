@@ -1,7 +1,21 @@
 import _import from './importer';
 import Home from '@/views/layouts/Home';
-import IRouteMeta from '@/models/IRouteMeta';
 import Virtual from '@/views/layouts/Virtual';
+
+export class Meta {
+  constructor({ title, hideBreadcrumb = false, roles = null }) {
+    this.title = title;
+    this.hideBreadcrumb = hideBreadcrumb;
+    this.roles = roles;
+  }
+}
+
+export class NavigationMeta extends Meta {
+  constructor({ title, hideBreadcrumb = false, roles = null, icon = '' }) {
+    super({ title, hideBreadcrumb, roles });
+    this.icon = icon;
+  }
+}
 
 export const navigation = [
   {
@@ -9,10 +23,9 @@ export const navigation = [
     alias: ['index', 'dashboard'],
     name: 'Index',
     component: _import('index/Index'),
-    meta: new IRouteMeta({
+    meta: new NavigationMeta({
       title: 'Dashboard',
       hideBreadcrumb: true,
-      hideTitleInBrowserTab: true,
       icon: 'home'
     })
   },
@@ -21,13 +34,13 @@ export const navigation = [
     name: 'Crud',
     component: Virtual,
     redirect: { name: 'CrudTable' },
-    meta: new IRouteMeta({ title: 'CRUD', disabledInBreadcrumb: true, icon: 'control' }),
+    meta: new NavigationMeta({ title: 'CRUD', disabledInBreadcrumb: true, icon: 'control' }),
     children: [
       {
         path: 'table',
         name: 'CrudTable',
         component: _import('crud/Table'),
-        meta: new IRouteMeta({ title: 'Table' })
+        meta: new NavigationMeta({ title: 'Table' })
       }
     ]
   },
@@ -36,13 +49,13 @@ export const navigation = [
     name: 'Chart',
     component: Virtual,
     redirect: { name: 'ChartSimple' },
-    meta: new IRouteMeta({ title: 'Chart', disabledInBreadcrumb: true, icon: 'bar-chart' }),
+    meta: new NavigationMeta({ title: 'Chart', disabledInBreadcrumb: true, icon: 'bar-chart' }),
     children: [
       {
         path: 'simple',
         name: 'ChartSimple',
         component: _import('chart/Simple'),
-        meta: new IRouteMeta({ title: 'Simple' })
+        meta: new NavigationMeta({ title: 'Simple' })
       }
     ]
   },
@@ -50,38 +63,42 @@ export const navigation = [
     path: 'permission',
     name: 'Permission',
     component: Virtual,
-    meta: new IRouteMeta({ title: 'Permission', disabledInBreadcrumb: true, icon: 'file-protect' }),
+    meta: new NavigationMeta({
+      title: 'Permission',
+      disabledInBreadcrumb: true,
+      icon: 'file-protect'
+    }),
     children: [
       {
         path: 'user',
         name: 'PermissionUser',
         component: _import('permission/User'),
-        meta: new IRouteMeta({ title: 'User' })
+        meta: new NavigationMeta({ title: 'User' })
       },
       {
         path: 'category',
         name: 'PermissionCategory',
         component: _import('permission/Category'),
-        meta: new IRouteMeta({ title: 'Category' })
+        meta: new NavigationMeta({ title: 'Category' })
       },
       {
         path: 'post',
         name: 'PermissionPost',
         component: _import('permission/Post'),
-        meta: new IRouteMeta({ title: 'Post' })
+        meta: new NavigationMeta({ title: 'Post' })
       }
     ]
   },
   {
     path: 'custom',
     name: 'Custom',
-    meta: new IRouteMeta({ title: 'Custom', icon: 'number' })
+    meta: new NavigationMeta({ title: 'Custom Event', icon: 'number' })
   },
   {
     path: 'setting',
     name: 'Setting',
     component: _import('setting/Index'),
-    meta: new IRouteMeta({ title: 'Settings', icon: 'setting' })
+    meta: new NavigationMeta({ title: 'Settings', icon: 'setting' })
   }
 ];
 

@@ -7,7 +7,7 @@
       </template>
     </a-alert>
 
-    <a-card class="g-gap">
+    <a-card v-gap>
       <a-form-model layout="inline" :model="form">
         <a-form-model-item label="Status" prop="status">
           <a-select v-size:w="180" v-model="form.status" placeholder="Please select Status">
@@ -39,7 +39,8 @@
       </a-form-model>
 
       <a-table
-        class="table g-gap-s"
+        v-gap:mt="12"
+        class="table"
         row-key="id"
         size="middle"
         :loading="isLoading"

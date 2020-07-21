@@ -27,7 +27,7 @@
             @keydown.enter="onLogin"
           ></a-input>
         </a-form-model-item>
-        <a-form-model-item class="g-gap" :wrapper-col="{ offset: 4 }">
+        <a-form-model-item v-gap :wrapper-col="{ offset: 4 }">
           <a-button type="primary" :loading="isSubmitting" @click="onLogin">登录</a-button>
         </a-form-model-item>
       </a-form-model>

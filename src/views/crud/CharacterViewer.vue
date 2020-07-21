@@ -8,7 +8,7 @@
   >
     <a-spin :spinning="isLoading">
       <div class="profile">
-        <a-descriptions bordered class="g-gap">
+        <a-descriptions bordered>
           <a-descriptions-item label="Avatar" :span="3">
             <a-avatar class="profile-avatar" shape="square" :src="character.image"></a-avatar>
           </a-descriptions-item>

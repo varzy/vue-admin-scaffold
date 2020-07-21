@@ -27,11 +27,11 @@ instance.interceptors.response.use(
 
     // http: 404
     if (+res.status === 404) {
-      AMessage.open({ content: '404 Not Found.', type: 'error' });
+      AMessage.open({ content: '未找到资源', type: 'error' });
     }
     // http: 504
     else if (+res.status === 504) {
-      AMessage.open({ content: 'Connection Timeout.', type: 'error' });
+      AMessage.open({ content: '网络连接超时', type: 'error' });
     }
     // 其他异常时，如果接口允许显示异常，则显示预设的异常信息
     else if (res.config && res.config.showError) {

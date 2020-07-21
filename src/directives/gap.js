@@ -1,7 +1,8 @@
 /**
- * v-gap:mt="12"
+ * v-gap
+ * v-gap:mt="16"
  */
-export default function(el, { value, arg }) {
+export default function(el, { arg = 'mt', value = 16 }) {
   const relation = {
     mt: 'margin-top',
     mr: 'margin-right',

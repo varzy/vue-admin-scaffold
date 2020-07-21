@@ -2,7 +2,7 @@ import Router from './router';
 import Store from '../store/';
 import { navigation } from './routes';
 import Permission from '@/utils/Permission';
-import { ls } from '@/utils/Storage';
+import { ls } from '@/utils/storage';
 import NProgress from 'nprogress';
 
 NProgress.configure({ showSpinner: false });
@@ -56,8 +56,7 @@ Router.beforeEach((to, from, next) => {
   /**
    * 浏览器标签页标题
    */
-  const routeTitle =
-    to.meta && !to.meta.hideTitleInBrowserTab && to.meta.title ? to.meta.title : null;
+  const routeTitle = to.meta && to.meta.title ? to.meta.title : null;
   document.title = routeTitle
     ? `${routeTitle} - ${process.env.VUE_APP_PROJECT_NAME}`
     : `${process.env.VUE_APP_PROJECT_NAME}`;
