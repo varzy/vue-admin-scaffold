@@ -1,7 +1,7 @@
 import Router from './router';
 import Store from '../store/';
 import { navigation } from './routes';
-import Permission from '@/utils/Permission';
+import Permission from '@/utils/permission';
 import { ls } from '@/utils/storage';
 import NProgress from 'nprogress';
 
@@ -26,7 +26,7 @@ Router.beforeEach((to, from, next) => {
   NProgress.start();
 
   /**
-   * 权限
+   * 登录
    */
   // 已登录
   if (Permission.isLogin()) {
@@ -50,16 +50,20 @@ Router.beforeEach((to, from, next) => {
   }
   // 更新是否显示面包屑导航栏
   Store.commit('view/UPDATE_BREADCRUMB_VISIBLE', to.meta && !to.meta.hideBreadcrumb);
-
-  /**
-   * 浏览器标签页标题
-   */
+  // 浏览器标签页标题
   const routeTitle = to.meta && to.meta.title ? to.meta.title : null;
   document.title = routeTitle
     ? `${routeTitle} - ${process.env.VUE_APP_PROJECT_NAME}`
     : `${process.env.VUE_APP_PROJECT_NAME}`;
 
-  next();
+  /**
+   * 页面权限
+   */
+  if (to.meta.roles && !Store.getters['user/hasPermission'](to.meta.roles)) {
+    next({ name: 'Error401' });
+  } else {
+    next();
+  }
 });
 
 Router.afterEach(() => {

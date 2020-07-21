@@ -152,19 +152,19 @@ export default [
         path: 'profile',
         name: 'Profile',
         component: _import('profile/Index'),
-        meta: { title: 'Profile' }
+        meta: new Meta({ title: 'Profile' })
       },
       {
         path: '/404',
         name: 'Error404',
         component: _import('errors/404'),
-        meta: { title: '404' }
+        meta: new Meta({ title: '404' })
       },
       {
         path: '/401',
         name: 'Error401',
         component: _import('errors/401'),
-        meta: { title: '401' }
+        meta: new Meta({ title: '401' })
       }
     ]
   },
@@ -172,7 +172,7 @@ export default [
     path: '/login',
     name: 'Login',
     component: _import('login/Index'),
-    meta: { title: 'Login' }
+    meta: new Meta({ title: 'Login' })
   },
   { path: '*', redirect: { name: 'Error404' } }
 ];

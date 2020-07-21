@@ -9,18 +9,14 @@ export class UserInfo {
     this.avatar = avatar;
     this.roles = roles;
   }
-
-  get roleNames() {
-    return this.roles.map(role => role.name);
-  }
 }
 
-export default class Permission {
-  static isLogin() {
+export default {
+  isLogin() {
     return !!ls.get('user');
-  }
+  },
 
-  static async login(loginData) {
+  async login(loginData) {
     const { data } = await reqLogin(loginData);
     ls.set(
       'user',
@@ -32,9 +28,9 @@ export default class Permission {
         roles: data.roles
       })
     );
-  }
+  },
 
-  static logout() {
+  logout() {
     ls.clear('user');
   }
-}
+};

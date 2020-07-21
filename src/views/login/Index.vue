@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Permission from '@/utils/Permission';
+import Permission from '@/utils/permission';
 
 export default {
   name: 'Login',

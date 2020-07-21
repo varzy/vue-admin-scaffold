@@ -83,7 +83,7 @@
 <script>
 import NavigationItem from '../widgets/NavigationItem';
 import PageFooter from '../widgets/Footer';
-import Permission from '../../utils/Permission';
+import Permission from '../../utils/permission';
 
 export default {
   name: 'Home',
