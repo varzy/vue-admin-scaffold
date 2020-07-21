@@ -6,24 +6,20 @@
       <a-form-model
         class="form"
         ref="form"
-        :label-col="{ span: 6 }"
+        :label-col="{ span: 4 }"
         :wrapper-col="{ span: 18 }"
         :model="form"
         :rules="formRules"
         :disabled="isSubmitting"
       >
-        <a-form-model-item label="Username" prop="username">
-          <a-input placeholder="Please input your Username" v-model="form.username"></a-input>
+        <a-form-model-item label="用户名" prop="username">
+          <a-input placeholder="请输入用户名" v-model="form.username"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="Password" prop="password">
-          <a-input
-            type="password"
-            placeholder="Please input your Password"
-            v-model="form.password"
-          ></a-input>
+        <a-form-model-item label="密码" prop="password">
+          <a-input type="password" placeholder="请输入密码" v-model="form.password"></a-input>
         </a-form-model-item>
-        <a-form-model-item class="g-gap" :wrapper-col="{ offset: 6 }">
-          <a-button type="primary" :loading="isSubmitting" @click="onLogin">Login</a-button>
+        <a-form-model-item class="g-gap" :wrapper-col="{ offset: 4 }">
+          <a-button type="primary" :loading="isSubmitting" @click="onLogin">登录</a-button>
         </a-form-model-item>
       </a-form-model>
     </div>
@@ -44,8 +40,8 @@ export default {
         password: ''
       },
       formRules: {
-        username: [{ required: true, message: 'The username is required.', trigger: 'blur' }],
-        password: [{ required: true, message: 'The password is required.', trigger: 'blur' }]
+        username: [{ required: true, message: '用户名必填', trigger: 'blur' }],
+        password: [{ required: true, message: '密码必填', trigger: 'blur' }]
       },
       projectName: process.env.VUE_APP_PROJECT_NAME
     };
@@ -67,10 +63,10 @@ export default {
           password: this.form.password
         });
 
-        this.$message.success('Welcome!');
+        this.$message.success('登录成功!');
         this.$router.push({ name: 'Index' });
       } catch (e) {
-        this.$message.error('Login failed. Please recheck your username or password.');
+        this.$message.error('登录失败，请检查您的用户名或密码');
       } finally {
         this.isSubmitting = false;
       }
