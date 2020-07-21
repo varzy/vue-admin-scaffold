@@ -1,5 +1,5 @@
 import { ls } from '@/utils/Storage';
-import { reqLogin } from '@/api/mock';
+import { reqLogin } from '@/api/auth';
 
 export default class Permission {
   static isLogin() {
@@ -8,15 +8,11 @@ export default class Permission {
 
   static async login(loginData) {
     const { data } = await reqLogin(loginData);
-
-    if (data.status !== 0) {
-      throw new Error('login_fail');
-    }
-
     ls.set('user', {
-      id: 1,
-      username: 'username',
-      name: 'Nickname'
+      id: data.id,
+      username: data.username,
+      name: data.name,
+      avatar: data.avatar
     });
   }
 

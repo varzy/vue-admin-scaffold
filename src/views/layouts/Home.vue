@@ -10,7 +10,11 @@
         <a-dropdown @click.stop>
           <div class="user right-item">
             <span class="user-trigger">
-              <a-avatar class="user-trigger-avatar" icon="user" />
+              <a-avatar
+                class="user-trigger-avatar"
+                icon="user"
+                :src="$store.state.user.userInfo.avatar"
+              />
               <span class="user-trigger-username">{{ $store.state.user.userInfo.name }}</span>
             </span>
           </div>

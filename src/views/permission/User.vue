@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { reqFetchGoods } from '@/api/goods';
+// import { reqFetchGoods } from '@/api/goods';
 
 export default {
   name: 'User',
@@ -16,8 +16,8 @@ export default {
 
   methods: {
     async getGoods() {
-      const res = await reqFetchGoods();
-      console.log(res);
+      // const res = await reqFetchGoods();
+      // console.log(res);
     }
   }
 };

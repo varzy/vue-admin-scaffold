@@ -2,7 +2,7 @@ export default {
   namespaced: true,
 
   state: {
-    userInfo: { id: 0, username: '', name: '' }
+    userInfo: { id: 0, username: '', name: '', avatar: '' }
   },
 
   mutations: {

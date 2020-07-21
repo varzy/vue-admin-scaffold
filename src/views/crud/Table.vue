@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { reqFetchCharacters } from '../../api/mock';
+import { reqFetchCharacters } from '../../api/characters';
 import CharacterViewer from './CharacterViewer';
 import { asyncTimeout } from '@/utils/helpers';
 

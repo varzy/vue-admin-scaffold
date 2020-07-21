@@ -13,10 +13,19 @@
         :disabled="isSubmitting"
       >
         <a-form-model-item label="用户名" prop="username">
-          <a-input placeholder="请输入用户名" v-model="form.username"></a-input>
+          <a-input
+            placeholder="请输入用户名"
+            v-model="form.username"
+            @keydown.enter="onLogin"
+          ></a-input>
         </a-form-model-item>
         <a-form-model-item label="密码" prop="password">
-          <a-input type="password" placeholder="请输入密码" v-model="form.password"></a-input>
+          <a-input
+            type="password"
+            placeholder="请输入密码"
+            v-model="form.password"
+            @keydown.enter="onLogin"
+          ></a-input>
         </a-form-model-item>
         <a-form-model-item class="g-gap" :wrapper-col="{ offset: 4 }">
           <a-button type="primary" :loading="isSubmitting" @click="onLogin">登录</a-button>

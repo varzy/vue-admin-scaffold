@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { reqShowCharacter } from '@/api/mock';
+import { reqShowCharacter } from '@/api/characters';
 
 export default {
   name: 'CharacterViewer',
